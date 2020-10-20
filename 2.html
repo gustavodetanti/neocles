@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<a href='index.html'>index</a>
+ XXXX
+
+
+<ul id='list'></ul>
+
+<script>
+
+
+
+window.onload=init;
+
+
+function init(){
+const el=document.getElementById('list');
+fetch('j.json').then(
+    res=>{
+
+return res.json()        
+    }
+).then(json=>{
+let str=''
+json.map(el=>{
+
+ str+=`<li>${el}</li>`;
+
+
+})
+
+el.innerHTML=str;
+
+
+}).catch(err=>console.log(err))
+
+
+
+
+
+}
+
+
+</script>
+
+</body>
+</html>
