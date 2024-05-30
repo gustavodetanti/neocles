@@ -194,7 +194,7 @@ window.onload=function(){
 
 document.querySelector('.app').innerHTML='neocles';
 let str='';
-    for( var i=0;i<2000;i++){
+    for( var i=0;i<12000;i++){
 str+=` <span> ${allpals[parseInt(Math.random()*allpals.length)]} </span> `;
     }
     document.querySelector('.app').innerHTML=str;
