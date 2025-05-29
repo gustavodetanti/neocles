@@ -1,0 +1,33 @@
+
+			body {
+                color:#00000088;
+                  margin: 0; 
+            font-family: sans-serif;
+        
+            }
+                    canvas { display: block; } 
+              ul{
+                list-style: none;
+                font-size:10px; 
+              }
+                    ul li span{
+               
+                padding-right:12px ;
+              }
+              ul li span:nth-child(1){
+                font-size: 16px;
+                color:#000000;
+          
+              }
+              .ss ul{
+        display:inline-block;
+              }
+        
+        a{
+          text-decoration: none;
+          color:rgb(10, 165, 2);
+        }
+        a:hover{
+          color:#000000;
+          text-decoration: underline;
+        }
