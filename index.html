@@ -60,6 +60,179 @@
         </ul>
 </div>
  
+
+<script   d-src='shaders.js'>
+
+  // Vertex shader
+  const vertexShader = `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
+   
+  // Fragment shader for contrast effect
+  const contrastFragmentShader = `
+    uniform sampler2D tDiffuse;
+    varying vec2 vUv;
+    uniform float contrast;
+  
+    void main() {
+      vec4 color = texture2D(tDiffuse, vUv);
+      color.rgb = contrast * (color.rgb - 0.5) + 0.5; // Apply contrast
+      gl_FragColor = color;
+    }
+  `;
+   
+   
+  // Fragment shader for double vision effect
+  const doubleFragmentShader = `
+    uniform sampler2D tDiffuse;
+    varying vec2 vUv;
+    uniform float offset; // Controls the offset between the "double" views
+  
+    void main() {
+      vec2 uv = vUv;
+      vec2 uvLeft = uv - vec2(offset, 0.0);
+      vec2 uvRight = uv + vec2(offset, 0.0);
+      
+      vec4 colorLeft = texture2D(tDiffuse, uvLeft);
+      vec4 colorRight = texture2D(tDiffuse, uvRight);
+      
+      gl_FragColor = mix(colorLeft, colorRight, 0.5); // Mix the colors for the double vision effect
+    }
+  `;
+  
+  const waveFragmentShader = `
+    uniform sampler2D tDiffuse;
+    varying vec2 vUv;
+    uniform float time; // Time to control the animation
+    uniform float amplitude; // Amplitude of the wave
+    uniform float frequency; // Frequency of the wave
+  
+    void main() {
+      // Calculate the displacement along the y-axis using a sine function
+      float displacement = amplitude * sin(vUv.x * frequency + time);
+  
+      // Apply the displacement to the texture coordinates
+      vec2 displacedUV = vec2(vUv.x, vUv.y + displacement);
+  
+      // Get the color from the displaced texture coordinates
+      vec4 color = texture2D(tDiffuse, displacedUV);
+  
+      gl_FragColor = color;
+    }
+  `;
+  const saturationFragmentShader = `
+    uniform sampler2D tDiffuse;
+    varying vec2 vUv;
+    uniform float saturationAmount; // Amount of saturation to apply
+  
+    void main() {
+      vec4 color = texture2D(tDiffuse, vUv);
+      
+      // Calculate grayscale value of the color
+      float gray = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));
+      
+      // Interpolate between grayscale and original color based on saturationAmount
+      color.rgb = mix(vec3(gray), color.rgb, saturationAmount);
+      
+      gl_FragColor = color;
+    }
+  `;
+  
+   
+  
+  
+   
+  
+  // Fragment shader for grain effect
+  const grainFragmentShader = `
+    uniform sampler2D tDiffuse;
+    varying vec2 vUv;
+    uniform float grainAmount; // Amount of grain
+  
+    // Function to generate random noise
+    float random(vec2 co) {
+      return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+    }
+  
+    void main() {
+      vec4 texColor = texture2D(tDiffuse, vUv);
+  
+      // Calculate a noise value
+      float noise = (random(vUv) - 0.3) * grainAmount;
+      
+      // Apply the noise to the color
+      texColor.rgb += vec3(noise);
+      
+      gl_FragColor = texColor;
+    }
+  `;
+  
+  
+  // Fragment shader for futuristic effect
+  const futuristicFragmentShader = `
+    uniform sampler2D tDiffuse;
+    varying vec2 vUv;
+    uniform float time; // Time for animation
+    uniform float distortion; // Distortion strength
+    uniform float scanlineIntensity; // Intensity of scanlines
+    uniform float glowIntensity; // Intensity of glow
+  
+    void main() {
+      // Add scanlines
+      vec4 texColor = texture2D(tDiffuse, vUv);
+      texColor.rgb -= vec3(mod(gl_FragCoord.y, 2.0)) * scanlineIntensity;
+  
+      // Create distortion effect
+      float distortionFactor = sin(vUv.y * 10.0 + time) * distortion;
+      vec2 distortedUV = vec2(vUv.x + distortionFactor, vUv.y);
+      vec4 distortedColor = texture2D(tDiffuse, distortedUV);
+  
+      // Apply glow
+      vec4 glowColor = mix(texColor, distortedColor, glowIntensity);
+  
+      gl_FragColor = glowColor;
+    }
+  `;
+  
+  //
+   
+  const customFragmentShader = `
+  uniform sampler2D tDiffuse;
+  uniform sampler2D displacementMap; // The displacement map texture
+  varying vec2 vUv;
+  uniform float time; // Time to control the animation
+  uniform float amplitude; // Amplitude of the wave
+  uniform float frequency; // Frequency of the wave
+  uniform vec2 mousePosition; // Mouse position in normalized coordinates
+  
+  void main() {
+    // Get the displacement value from the displacement map
+    vec4 displacementData = texture2D(displacementMap, vUv);
+  
+    // Calculate the displacement along the y-axis using a sine function
+    float displacement = amplitude * sin(vUv.x * frequency + time);
+  
+    // Calculate the distance from the current fragment to the mouse position
+    float distanceToMouse = distance(vUv, mousePosition);
+  
+    // Use the distance to adjust the displacement
+    displacement += (1.0 - distanceToMouse) * (displacementData.r - 0.5) * 2.0 * amplitude;
+  
+    // Apply the displacement to the texture coordinates
+    vec2 displacedUV = vec2(vUv.x, vUv.y + displacement);
+  
+    // Get the color from the displaced texture coordinates
+    vec4 color = texture2D(tDiffuse, displacedUV);
+  
+    gl_FragColor = color;
+  }
+  `;
+  
+  </script>
 <script d-type="module" src='js/green.js'></script>
 
  	</body>
