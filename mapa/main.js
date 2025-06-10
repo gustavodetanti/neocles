@@ -1,5 +1,8 @@
 // Import Three.js
-//esbuild mapa/main.js --bundle --outfile=mapa/main.bundle.js --loader:.js=jsx --format=cjs 
+//esbuild mapa/main.js --bundle --outfile=mapa/main.bundle.js --minify --watch
+
+console.log("MAPA");
+
 
 import * as THREE from './../three.js-master/build/three.module.js';
 import { FirstPersonControls } from './../three.js-master/examples/jsm/controls/FirstPersonControls.js';
@@ -7,36 +10,15 @@ import { FirstPersonControls } from './../three.js-master/examples/jsm/controls/
 import { Popup } from './Popup.js';
 import { setLights } from './setLights.js';
 import { setScene } from './setScene.js';
- 
-(()=>{})();
+  
 
- 
-
-const [scene,camera,renderer]=setScene(THREE);
-
+const [scene,camera,renderer]=setScene();
 const ligths=setLights(THREE,scene);
- 
-
 const clickableObjects = [];
 
 // Terrain
 const terrainWidth = 800;
 const terrainDepth = 800;
-/*
-const segments = 32;
-const geometry = new THREE.PlaneGeometry(terrainWidth, terrainDepth, segments, segments);
-geometry.rotateX(-Math.PI / 2);
-
-for (let i = 0; i < geometry.attributes.position.count; i++) {
-    let y = Math.random()<0.02?Math.random()*2000:Math.random() * 1500;
-    geometry.attributes.position.setY(i, y);
-}
-geometry.computeVertexNormals();
-const material = new THREE.MeshStandardMaterial({ color: 0xaaccbb, wireframe: false });
-const terrain = new THREE.Mesh(geometry, material);
-terrain.name = "terrain";
-
-*/
 const noiseHeight=8;
 const terrain=TerrainRare({w:terrainWidth,h:terrainDepth,posY:0,wire:false,noise:noiseHeight,divs:10});
 
@@ -49,6 +31,18 @@ const terrain_raycaster = new THREE.Raycaster();
 const down = new THREE.Vector3(0, -1, 0);
 
 
+
+
+animate();
+
+// Resize
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+console.log({camera});
 
 
 function getTerrainHeight(x, z) {
@@ -132,47 +126,8 @@ Popup(plantas.filter(p=>p.id==id)[0]);
 
 }
 
-
-let isFlying = false;
-let flyProgress = 0;
-let flyDuration = 2; // in seconds
-let flyStartTime = null;
-
-let startPosition = new THREE.Vector3();
-let startTarget = new THREE.Vector3();
-
-let endPosition = new THREE.Vector3();
-let endTarget = new THREE.Vector3();
-
-function _elementClicked(id) {
-    console.log("Elemento clickeado con ID:", id);
-    flyTo(id);
-}
-
-function flyTo(id) {
-    // Find the mesh with the matching ID
-    const targetMesh = clickableObjects.find(obj => obj.userData.id === id);
-    if (!targetMesh) return;
-
-    // Disable FirstPersonControls
-    controls.enabled = false;
-
-    // Set up fly animation
-    isFlying = true;
-    flyProgress = 0;
-    flyStartTime = performance.now() / 1000;
-
-    // Save current camera position and target
-    startPosition.copy(camera.position);
-    startTarget.copy(camera.position.clone().add(camera.getWorldDirection(new THREE.Vector3())));
-
-    // Destination
-    endTarget.copy(targetMesh.position.clone());
-
-    // Set the end camera position — e.g. 8000 units behind and 4000 above the target
-    const offset = new THREE.Vector3(0, 4000, 8000);
-    endPosition.copy(endTarget).add(offset);
-}
+ 
+  
 
 
 
@@ -211,7 +166,7 @@ function createTextLabel(text) {
     const texture = new THREE.CanvasTexture(canvas);
     const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
     const sprite = new THREE.Sprite(spriteMaterial);
-    sprite.scale.set(1, 1, 1);
+    sprite.scale.set(2, 2, 1);
     return sprite;
 }
 
@@ -224,54 +179,13 @@ let yy=getTerrainHeight(camera.position.x, camera.position.z)+noiseHeight+2;
 if(camera.position.y<yy){
     camera.position.y=yy;
 }
- 
-    controls.update(1);
+ if(controls)    controls.update(1);
  
     renderer.render(scene, camera);
 }
 
 
-
-
-function _animate() {
-    requestAnimationFrame(animate);
-
-
-const now = performance.now() / 1000;
-
-if (isFlying) {
-    const t = Math.min((now - flyStartTime) / flyDuration, 1);
-    const ease = t * t * (3 - 2 * t); // smoothstep easing
-
-    // Interpolate camera position and target
-    camera.position.lerpVectors(startPosition, endPosition, ease);
-    const lookAt = new THREE.Vector3().lerpVectors(startTarget, endTarget, ease);
-    camera.lookAt(lookAt);
-
-    if (t >= 1) {
-        isFlying = false;
-        controls.enabled = true; // re-enable controls
-    }
-} else {
-    camera.position.y = getTerrainHeight(camera.position.x, camera.position.z)+5;
-
-    controls.update(1); // Only update when not flying
-}
-
-}
-
-
-
-
-animate();
-
-// Resize
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
+ 
 
 
 
@@ -331,7 +245,7 @@ function capitalizar(str){
 
  
     //o={w,h,noise,color,wire}
-   export function TerrainRare(o) {
+    function TerrainRare(o) {
    let w=200,h=200;
    if(o && o.w){w=o.w};
    if(o && o.h){h=o.h};
@@ -406,6 +320,4 @@ function capitalizar(str){
    }
    
    
-   
-   
-   
+    

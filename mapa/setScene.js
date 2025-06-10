@@ -1,5 +1,7 @@
  
-export function setScene(THREE) {
+ import * as THREE from './../three.js-master/build/three.module.js';
+
+export function setScene() {
     // Scene, Camera, Renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 100000);
