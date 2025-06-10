@@ -1,4 +1,5 @@
 // Import Three.js
+//esbuild mapa/main.js --bundle --outfile=mapa/main.bundle.js --loader:.js=jsx --format=cjs 
 
 import * as THREE from './../three.js-master/build/three.module.js';
 import { FirstPersonControls } from './../three.js-master/examples/jsm/controls/FirstPersonControls.js';
