@@ -5,132 +5,236 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fases de la Luna 2025-2026</title>
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 900px;
-            margin: 0 auto;
+        }
+        
+        body {
+         background: #000000;
+            color: #fff;
+            min-height: 100vh;
             padding: 20px;
-            background-color: #f0f0f0;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
-        .container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-        .moon-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 30px 0;
         }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+         
+        }
+        
+     
+      
+       
+        .moon-display-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        
+     
+   
+        }
+        
         .moon-display {
             width: 300px;
             height: 300px;
-            margin: 20px 0;
+     
         }
+        
+        .moon-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
         .date-display {
-            font-size: 1.5em;
+            font-size: 1.8rem;
             margin: 15px 0;
             font-weight: bold;
-            color: #2c3e50;
-        }
-        .phase-display {
-            font-size: 1.2em;
-            margin-bottom: 15px;
             color: #3498db;
         }
+        
+        .phase-display {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .super-moon {
+            color: #f1c40f;
+            text-shadow: 0 0 10px #f1c40f;
+        }
+        
         .distance-display {
-            font-size: 1em;
-            color: #7f8c8d;
+            font-size: 1.2rem;
+            color: #bdc3c7;
             margin-bottom: 20px;
         }
+        
         .navigation {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
             margin: 20px 0;
             flex-wrap: wrap;
         }
+        
         button {
-            padding: 8px 15px;
-            background-color: #3498db;
+            padding: 12px 25px;
+            background:#222222;
             color: white;
             border: none;
-            border-radius: 5px;
+            
             cursor: pointer;
-            transition: background-color 0.3s;
+  
+            font-size: 1rem;
+            font-weight: bold;
+        
         }
+        
         button:hover {
-            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.4);
         }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
         .time-unit-buttons {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
+        
         .time-unit-buttons button {
-            background-color: #2c3e50;
+            padding: 10px 20px;
+            background: rgba(52, 152, 219, 0.2);
         }
+        
         .time-unit-buttons button.active {
-            background-color: #3498db;
+            background: linear-gradient(45deg, #3498db, #2980b9);
         }
+        
         .legend {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #ecf0f1;
-            border-radius: 5px;
-            font-size: 0.9em;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(44, 62, 80, 0.5);
+            border-radius: 15px;
+            font-size: 1rem;
+            line-height: 1.6;
         }
-        .super-moon {
-            color: #e74c3c;
-            font-weight: bold;
+        
+        .legend-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #3498db;
+            text-align: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .color-box {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+        
+        .moon-color {
+            background: #f5f5f5;
+        }
+        
+        .shadow-color {
+            background: #2c3e50;
+        }
+        
+        .super-moon-color {
+            background: #f1c40f;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #bdc3c7;
+            padding: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .moon-display {
+                width: 200px;
+                height: 200px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .date-display {
+                font-size: 1.4rem;
+            }
+            
+            .phase-display {
+                font-size: 1.2rem;
+            }
+            
+            button {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
+   
     <div class="container">
-        <h1>Fases de la Luna 2025-2026</h1>
+    
         
-        <div class="time-unit-buttons">
-            <button id="day-unit" class="active">Día</button>
-            <button id="week-unit">Semana</button>
-            <button id="month-unit">Mes</button>
-            <button id="year-unit">Año</button>
-        </div>
-        
-        <div class="moon-container">
+        <div class="moon-display-container">
             <div class="date-display" id="current-date">13 enero 2025</div>
             <div class="phase-display" id="current-phase">Luna llena</div>
             <div class="distance-display" id="current-distance">Distancia: 383.921 km</div>
             
-            <svg class="moon-display" viewBox="0 0 100 100">
-                <!-- Fondo de la luna (siempre visible) -->
-                <circle cx="50" cy="50" r="45" fill="#f5f5f5" stroke="#ddd" stroke-width="0.5"/>
-                <!-- Sombra que cambia según la fase -->
-                <path id="moon-shadow" fill="#2c3e50"/>
+            <svg class="moon-display" viewBox="0 0 100 100" style="transform:rotate(-15deg);">
+                <!-- Definición de la máscara para crear fases lunares -->
+             
+                
+                <!-- Círculo de la luna (aplicamos la máscara) -->
+                <circle cx="50" cy="50" r="45"  fill="#f5f5f5"/>
+                
+                <!-- Cráteres lunares (detalle decorativo) -->
+                <circle cx="35" cy="35" r="3" fill="rgba(0,0,0,0.1)"/>
+                <circle cx="60" cy="40" r="5" fill="rgba(0,0,0,0.1)"/>
+                <circle cx="45" cy="65" r="4" fill="rgba(0,0,0,0.1)"/>
+                <circle cx="70" cy="60" r="2" fill="rgba(0,0,0,0.1)"/>
+                <circle cx="50" cy="50" r="45"  id="moon-shadow"   fill="#33333322"/>
+                
             </svg>
         </div>
         
         <div class="navigation">
-            <button id="prev-btn">&lt; Anterior</button>
-            <button id="today-btn">Hoy</button>
-            <button id="next-btn">Siguiente &gt;</button>
+            <button id="prev-btn">-</button>
+            <button id="today-btn">o</button>
+            <button id="next-btn">+</button>
         </div>
         
-        <div class="legend">
-            <p><strong>Leyenda:</strong></p>
-            <p>• <span class="super-moon">Superluna</span>: Cuando la luna llena coincide con el perigeo (máxima cercanía a la Tierra)</p>
-            <p>• La distancia promedio Tierra-Luna es de aproximadamente 384,400 km</p>
-        </div>
+    
     </div>
-
+    
+ 
     <script>
         // Datos de las fases lunares
         const moonPhases = [
@@ -263,10 +367,51 @@
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const todayBtn = document.getElementById('today-btn');
-        const dayUnitBtn = document.getElementById('day-unit');
+        /*const dayUnitBtn = document.getElementById('day-unit');
         const weekUnitBtn = document.getElementById('week-unit');
         const monthUnitBtn = document.getElementById('month-unit');
         const yearUnitBtn = document.getElementById('year-unit');
+*/
+        // Función para actualizar el gráfico de la luna según la fase
+        function updateMoonGraphic(phase) {
+            let shadowPath;
+            let x=0;
+            // Determinar la fase y crear la trayectoria de la sombra correspondiente
+            if (phase.includes("Luna nueva")) {
+                // Luna completamente oscura
+                shadowPath = 'M50,5 A45,45 0 1,1 50,95 A45,45 0 1,1 50,5';
+                x=0;
+            } else if (phase.includes("Cuarto creciente")) {
+                // Media luna creciente (derecha iluminada)
+                shadowPath = 'M50,50 L50,5 A45,45 0 0,1 50,95 Z';
+                x=45;
+            } else if (phase.includes("Luna llena")) {
+                // Sin sombra (luna completa)
+                shadowPath = '';
+                x=90;
+            } else if (phase.includes("Cuarto menguante")) {
+                // Media luna menguante (izquierda iluminada)
+                shadowPath = 'M50,50 L50,5 A45,45 0 0,0 50,95 Z';
+                x=-45;
+            } else if (phase.includes("creciente")) {
+                // Luna creciente (más que cuarto pero menos que llena)
+                shadowPath = 'M50,50 L50,5 A45,45 0 0,1 50,95 Z';
+                x=-22;
+            } else if (phase.includes("menguante")) {
+                // Luna menguante (más que cuarto pero menos que nueva)
+                shadowPath = 'M50,50 L50,5 A45,45 0 0,0 50,95 Z';
+                x=22;
+            } else {
+                // Por defecto: luna nueva
+                shadowPath = 'M50,5 A45,45 0 1,1 50,95 A45,45 0 1,1 50,5';
+                x=0
+            }
+            
+            // Aplicar la trayectoria de sombra
+            //moonShadowEl.setAttribute('d', shadowPath);
+            moonShadowEl.setAttribute('cx', `${x+50}`);
+
+        }
 
         // Función para actualizar la visualización
         function updateDisplay() {
@@ -288,49 +433,10 @@
             updateMoonGraphic(currentPhase.phase);
         }
 
-        // Función para actualizar el gráfico de la luna según la fase
-        function updateMoonGraphic(phase) {
-            let shadowPath;
-            
-            switch(phase) {
-                case 'Luna nueva':
-                    shadowPath = 'M50,5 A45,45 0 1,1 50,95 A45,45 0 1,1 50,5';
-                    break;
-                case 'Cuarto creciente':
-                    shadowPath = 'M50,5 A45,45 0 0,1 50,95 A45,45 0 0,0 50,5';
-                    break;
-                case 'Luna llena':
-                case 'Luna llena (Superluna)':
-                    shadowPath = '';
-                    break;
-                case 'Cuarto menguante':
-                    shadowPath = 'M50,5 A45,45 0 0,0 50,95 A45,45 0 0,1 50,5';
-                    break;
-                default:
-                    // Para fases intermedias (creciente o menguante)
-                    if (phase.includes('creciente')) {
-                        // Luna creciente (más que cuarto pero menos que llena)
-                        shadowPath = 'M50,5 A45,45 0 0,1 50,95 A22.5,22.5 0 0,0 50,5';
-                    } else if (phase.includes('menguante')) {
-                        // Luna menguante (más que cuarto pero menos que nueva)
-                        shadowPath = 'M50,5 A22.5,22.5 0 0,0 50,95 A45,45 0 0,1 50,5';
-                    } else {
-                        shadowPath = '';
-                    }
-            }
-            
-            moonShadowEl.setAttribute('d', shadowPath);
-        }
-
         // Función para navegar a la fase anterior
         function goToPreviousPhase() {
             let step = 1;
-            
-            switch(timeUnit) {
-                case 'week': step = 7; break;
-                case 'month': step = 30; break;
-                case 'year': step = 365; break;
-            }
+        
             
             // Encontrar la fase más cercana pero anterior
             const currentDate = moonPhases[currentIndex].dateObj;
@@ -353,11 +459,7 @@
         function goToNextPhase() {
             let step = 1;
             
-            switch(timeUnit) {
-                case 'week': step = 7; break;
-                case 'month': step = 30; break;
-                case 'year': step = 365; break;
-            }
+          
             
             // Encontrar la fase más cercana pero posterior
             const currentDate = moonPhases[currentIndex].dateObj;
@@ -396,34 +498,12 @@
             updateDisplay();
         }
 
-        // Función para cambiar la unidad de tiempo
-        function setTimeUnit(unit) {
-            timeUnit = unit;
-            
-            // Actualizar botones activos
-            dayUnitBtn.classList.remove('active');
-            weekUnitBtn.classList.remove('active');
-            monthUnitBtn.classList.remove('active');
-            yearUnitBtn.classList.remove('active');
-            
-            switch(unit) {
-                case 'day': dayUnitBtn.classList.add('active'); break;
-                case 'week': weekUnitBtn.classList.add('active'); break;
-                case 'month': monthUnitBtn.classList.add('active'); break;
-                case 'year': yearUnitBtn.classList.add('active'); break;
-            }
-        }
-
+ 
         // Event listeners
         prevBtn.addEventListener('click', goToPreviousPhase);
         nextBtn.addEventListener('click', goToNextPhase);
         todayBtn.addEventListener('click', goToToday);
-        dayUnitBtn.addEventListener('click', () => setTimeUnit('day'));
-        weekUnitBtn.addEventListener('click', () => setTimeUnit('week'));
-        monthUnitBtn.addEventListener('click', () => setTimeUnit('month'));
-        yearUnitBtn.addEventListener('click', () => setTimeUnit('year'));
-
-        // Inicializar
+   
         updateDisplay();
     </script>
 </body>

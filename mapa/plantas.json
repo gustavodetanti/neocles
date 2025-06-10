@@ -1,0 +1,33 @@
+[
+    {
+        "id": "_planta_0",
+        "name": "Kehemo",
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "color": "#66ff66",
+        "data": [{"name":"estado","value":"vivo"}],
+        "img":"fotos/3.png"
+    },
+    {
+        "id": "_planta_1",
+        "name": "Limón",
+        "x": 272.3511986972318,
+        "y": 0,
+        "z": -51.49424802041034,
+        "color": "rgba(63,149,136)",
+        "data": [],
+        "img":"fotos/1.png"
+    },
+    {
+        "id": "_planta_2",
+        "name": "Wasotsu",
+        "x": -210.14688172060607,
+        "y": 0,
+        "z": -154.83859619254378,
+        "color": "rgba(72,64,5)",
+        "data": [],
+        "img":"fotos/2.png",
+        "txt":"poda 20/07/2025"
+    }
+]

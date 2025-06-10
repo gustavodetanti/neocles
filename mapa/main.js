@@ -10,8 +10,9 @@ import { FirstPersonControls } from './../three.js-master/examples/jsm/controls/
 import { Popup } from './Popup.js';
 import { setLights } from './setLights.js';
 import { setScene } from './setScene.js';
+import { TerrainRare } from './TerrainRare';
   
-
+let active=true;
 const [scene,camera,renderer]=setScene();
 const ligths=setLights(THREE,scene);
 const clickableObjects = [];
@@ -19,7 +20,7 @@ const clickableObjects = [];
 // Terrain
 const terrainWidth = 800;
 const terrainDepth = 800;
-const noiseHeight=8;
+const noiseHeight=30;
 const terrain=TerrainRare({w:terrainWidth,h:terrainDepth,posY:0,wire:false,noise:noiseHeight,divs:10});
 
 const world = new THREE.Group();
@@ -52,22 +53,17 @@ function getTerrainHeight(x, z) {
 }
 
 
-
-
-// plantas
-const plantas = [
-   
-];
-
-
-
-for(var i=0;i<67;i++){
+fetch('plantas.json').then(d=>d.json()).then(json=>plantasLoaded(json)).catch(e=>console.log(e))
+ 
+function plantasLoaded(jsn){
+/*
+for(var i=0;i<10;i++){
     plantas.push({
-        id:`planta_${i}`,name: randName(3), x: Math.random()*terrainWidth-(terrainWidth/2), y: 0, z: Math.random()*terrainDepth-(terrainDepth/2), color: randCol("#00aa00"), data: [] 
+        id:`IMAGINARY_${i}`,name: randName(3), x: Math.random()*terrainWidth-(terrainWidth/2), y: 0, z: Math.random()*terrainDepth-(terrainDepth/2), color: randCol("#00aa00"), data: [] 
     });
-}
-
-
+}*/
+plantas=jsn;
+console.log(JSON.stringify(plantas,false,4));
 
 
 
@@ -75,10 +71,11 @@ for(var i=0;i<67;i++){
 const plantasGroup = new THREE.Group();
 plantas.forEach(city => {
     city.y = getTerrainHeight(city.x, city.z);
-    let H=Math.random()*20+10;
+    let H=city.height||Math.random()*30+30;
+    let mat=city.img?bmpMaterial(city.img,()=>{}): new THREE.MeshStandardMaterial({ color: city.color });
    const cityMesh = new THREE.Mesh(
-    new THREE.CylinderGeometry(2, 2, H, 32), // Radius top, radius bottom, height, segments
-    new THREE.MeshStandardMaterial({ color: city.color })
+    new THREE.BoxGeometry(H/2, H, H/2, 32), // Radius top, radius bottom, height, segments
+   mat
 );
     cityMesh.position.set(city.x, city.y+H*0.5  , city.z);
     cityMesh.userData.id = city.id; // Asegúrate de que 'city' tenga una propiedad 'id'
@@ -87,7 +84,7 @@ plantas.forEach(city => {
 
 
     const cityLabel = createTextLabel(city.name);
-    cityLabel.position.set(city.x, city.y + H, city.z);
+    cityLabel.position.set(city.x, city.y + H*1.2, city.z);
 
     plantasGroup.add(cityMesh);
     plantasGroup.add(cityLabel);
@@ -96,16 +93,16 @@ plantas.forEach(city => {
 world.add(plantasGroup);
 
  
- 
+}
  
  
 
 // Controls
 const controls = new FirstPersonControls(camera, renderer.domElement);
-controls.lookSpeed = 0.0005;
-controls.movementSpeed = 0.5;
-controls.lookVertical = true;
-camera.position.set(0, 5, 10);
+controls.lookSpeed = 0.01;
+controls.movementSpeed = 3;
+controls.lookVertical = false;
+camera.position.set(0, 2, 10);
 
 
 
@@ -121,9 +118,18 @@ window.addEventListener('click', onClick, false);
 function elementClicked(id) {
     console.log("Elemento clickeado con ID:", id);
     // Aquí puedes hacer algo con ese ID
+active=false;
+let pp=Popup(plantas.filter(p=>p.id==id)[0]);
+pp.querySelector('.closePop').addEventListener('click',clk);
 
-Popup(plantas.filter(p=>p.id==id)[0]);
 
+function clk(e){
+    pp.removeEventListener('click',clk);
+ 
+        pp.parentNode.removeChild(pp);
+ active=true;
+ animate(1);  
+}
 }
 
  
@@ -155,18 +161,32 @@ function onClick(event) {
 
 
 
-
-// Label function
 function createTextLabel(text) {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    context.font = 'italic 8px Arial';
-    context.fillStyle = '#aaaaaa';
-    context.fillText(text, 1, 1);
+
+    // Set explicit size
+    canvas.width = 1024;
+    canvas.height = 256;
+
+    // Draw background for debugging (optional)
+    // context.fillStyle = '#333';
+    // context.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw text
+    context.font = 'italic 180px Arial';
+    context.fillStyle = '#222222';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+    // Create texture and sprite
     const texture = new THREE.CanvasTexture(canvas);
-    const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+    texture.minFilter = THREE.LinearFilter;
+    const spriteMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true });
     const sprite = new THREE.Sprite(spriteMaterial);
-    sprite.scale.set(2, 2, 1);
+    sprite.scale.set(10, 3, 1); // Adjust based on your scene scale
+
     return sprite;
 }
 
@@ -174,11 +194,13 @@ function createTextLabel(text) {
 
 // Animate
 function animate() {
+
+    if(active){} else return;
     requestAnimationFrame(animate);
 let yy=getTerrainHeight(camera.position.x, camera.position.z)+noiseHeight+2;
-if(camera.position.y<yy){
+//if(camera.position.y<yy){
     camera.position.y=yy;
-}
+//}
  if(controls)    controls.update(1);
  
     renderer.render(scene, camera);
@@ -244,80 +266,24 @@ function capitalizar(str){
 
 
  
-    //o={w,h,noise,color,wire}
-    function TerrainRare(o) {
-   let w=200,h=200;
-   if(o && o.w){w=o.w};
-   if(o && o.h){h=o.h};
-   let rh=o.noise||4;
-   
-   if(o.posY || o.posY==0){} else o.posY=-6;
-       let res=parseInt(w/10);
-       const group = new THREE.Group();
-       const geometry = new THREE.PlaneGeometry(w, h, res,res);
-       //let g=ModifyPlaneWithBitmap(geometry,res,(bmp)=>{console.log(bmp)})
-    let planePoints=[];
-       // Get the vertices of the PlaneGeometry
-       const vertices = geometry.attributes.position.array;
-       
-   let xx=0;
-   let zz=0;
-   let isBorder=true;
-       // Change the vertices (modify the geometry)
-       for (let i = 0; i < vertices.length; i += 3) {
-            
-           if(vertices[i]==-w/2 || vertices[i+1]==-h/2 || vertices[i]==w/2 || vertices[i+1]==h/2){
-               console.log(vertices[i], vertices[i+1], vertices[i+2]);
-               vertices[i + 2] = -1; // Move the vertices along the y-axis
-                   
-       } else {
-           vertices[i + 2] += Math.random() * rh; // Move the vertices along the y-axis
-          // if(Math.random()<0.01) vertices[i + 2] += Math.random() * 10;
-       }        
-   
-           planePoints.push({i:i, x:vertices[i],y:vertices[i + 1],z:vertices[i + 2]});
-   
-           xx+=3;
-           if(xx>=res){
-               xx=0;
-               zz+=3;
-           }
-   
+
+
+
+ 
+ function bmpMaterial(src,fn) {
+ 
+
+
     
-       }
-   
-       // Update the geometry to reflect the changes
-       geometry.attributes.position.needsUpdate = true;
-   
-       const material = new THREE.MeshPhongMaterial({
-           color: o.color||0xbbff88,
-   wireframe:o.wire||false,
-           opacity: 1,
-           transparent: false,
-       });
-   
-    
-   
-   
-       const plane = new THREE.Mesh(geometry, material); //bmpMaterial());
-     
-       plane.position.x = 0 * 1;
-       plane.position.y = o.posY * 1;
-       plane.position.z = 0 * 1;
-   
-       plane.rotation.x =  -Math.PI / 2;
-       plane.receiveShadow = true;
-      //plane.rotation.y =  Math.PI;
-       group.add(plane);
-   /*
-   if(fn){  terrainBmp(fn);//plane;
-   return;
-   }*/
-   if(window.terrainCreated)window.terrainCreated(plane,planePoints);
-   
-   return plane;
-   
-   }
-   
-   
-    
+    const loader = new THREE.TextureLoader();
+    const texture = loader.load(src);
+    const tmaterial = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        map: texture,
+        opacity: 1,
+        transparent: false
+      
+    });
+
+    return tmaterial;
+}

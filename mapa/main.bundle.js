@@ -29018,18 +29018,26 @@
       pop.classList.add("popup");
       document.body.appendChild(pop);
     }
+    if (obj.name == "")
+      obj.name = "no name";
     pop.innerHTML = ` 
-<h3>${obj.name} <small>${kanas.getKatakana(obj.name)}</small></h3>
-<p>${JSON.stringify(obj, false, 4)}</p>
+    <div class='closePop'>&times;</div>
+<h2>${kanas.getKatakana(obj.name)}</h2><small>${obj.name} </small>
+<ul>${obj.data.map((d) => {
+      return `<li>${d.name}: ${d.value}</li>`;
+    }).join("")}</ul>
+${obj.img ? `<img src='${obj.img}' style='width:calc( 100% - 40px );margin:20px;'>` : ""}
+<textarea style='width:95%;border:none;background:#cccccc;padding:5px;' rows='6'>${obj.txt || ""}</textarea>
  `;
+    return pop;
   }
 
   // mapa/setLights.js
-  function setLights(THREE2, scene2) {
-    const light = new THREE2.DirectionalLight(16777215, 1);
+  function setLights(THREE3, scene2) {
+    const light = new THREE3.DirectionalLight(16777215, 1);
     light.position.set(1e3, 1e3, 1e3);
     scene2.add(light);
-    const light1 = new THREE2.AmbientLight(16777215, 1);
+    const light1 = new THREE3.AmbientLight(16777215, 1);
     scene2.add(light1);
     return [light, light1];
   }
@@ -29050,137 +29058,7 @@
     return [scene2, camera2, renderer2];
   }
 
-  // mapa/main.js
-  console.log("MAPA");
-  var [scene, camera, renderer] = setScene();
-  var ligths = setLights(three_module_exports, scene);
-  var clickableObjects = [];
-  var terrainWidth = 800;
-  var terrainDepth = 800;
-  var noiseHeight = 8;
-  var terrain = TerrainRare({ w: terrainWidth, h: terrainDepth, posY: 0, wire: false, noise: noiseHeight, divs: 10 });
-  var world = new Group();
-  world.add(terrain);
-  scene.add(world);
-  var terrain_raycaster = new Raycaster();
-  var down = new Vector3(0, -1, 0);
-  animate();
-  window.addEventListener("resize", () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-  console.log({ camera });
-  function getTerrainHeight(x, z) {
-    terrain_raycaster.set(new Vector3(x, 1e4, z), down);
-    const intersects2 = terrain_raycaster.intersectObject(terrain);
-    return intersects2.length > 0 ? intersects2[0].point.y : 0;
-  }
-  var plantas = [];
-  for (var i = 0; i < 67; i++) {
-    plantas.push({
-      id: `planta_${i}`,
-      name: randName(3),
-      x: Math.random() * terrainWidth - terrainWidth / 2,
-      y: 0,
-      z: Math.random() * terrainDepth - terrainDepth / 2,
-      color: randCol("#00aa00"),
-      data: []
-    });
-  }
-  var plantasGroup = new Group();
-  plantas.forEach((city) => {
-    city.y = getTerrainHeight(city.x, city.z);
-    let H = Math.random() * 20 + 10;
-    const cityMesh = new Mesh(new CylinderGeometry(2, 2, H, 32), new MeshStandardMaterial({ color: city.color }));
-    cityMesh.position.set(city.x, city.y + H * 0.5, city.z);
-    cityMesh.userData.id = city.id;
-    clickableObjects.push(cityMesh);
-    const cityLabel = createTextLabel(city.name);
-    cityLabel.position.set(city.x, city.y + H, city.z);
-    plantasGroup.add(cityMesh);
-    plantasGroup.add(cityLabel);
-  });
-  world.add(plantasGroup);
-  var controls = new FirstPersonControls(camera, renderer.domElement);
-  controls.lookSpeed = 5e-4;
-  controls.movementSpeed = 0.5;
-  controls.lookVertical = true;
-  camera.position.set(0, 5, 10);
-  var raycaster = new Raycaster();
-  var mouse = new Vector2();
-  window.addEventListener("click", onClick, false);
-  function elementClicked(id) {
-    console.log("Elemento clickeado con ID:", id);
-    Popup(plantas.filter((p) => p.id == id)[0]);
-  }
-  function onClick(event) {
-    mouse.x = event.clientX / window.innerWidth * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, camera);
-    const intersects2 = raycaster.intersectObjects(clickableObjects);
-    if (intersects2.length > 0) {
-      const clicked = intersects2[0].object;
-      const id = clicked.userData.id;
-      elementClicked(id);
-    }
-  }
-  function createTextLabel(text) {
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-    context.font = "italic 8px Arial";
-    context.fillStyle = "#aaaaaa";
-    context.fillText(text, 1, 1);
-    const texture = new CanvasTexture(canvas);
-    const spriteMaterial = new SpriteMaterial({ map: texture });
-    const sprite = new Sprite(spriteMaterial);
-    sprite.scale.set(2, 2, 1);
-    return sprite;
-  }
-  function animate() {
-    requestAnimationFrame(animate);
-    let yy = getTerrainHeight(camera.position.x, camera.position.z) + noiseHeight + 2;
-    if (camera.position.y < yy) {
-      camera.position.y = yy;
-    }
-    if (controls)
-      controls.update(1);
-    renderer.render(scene, camera);
-  }
-  function randCol(nn) {
-    var r, g, b;
-    var mx = 255 * 3;
-    var sep = rand(10) + 20;
-    b = rand(176 - sep);
-    r = b + sep;
-    g = rand(sep * 0.8) + b + 10;
-    var dif = mx - (r + g + b);
-    if (dif < 5) {
-    }
-    return "rgba(" + r + "," + g + "," + b + ")";
-  }
-  function rand(arr) {
-    if (arr == void 0)
-      return Math.random();
-    if (isNaN(arr)) {
-      if (arr)
-        return arr[parseInt(Math.random() * arr.length)];
-    } else
-      return parseInt(Math.random() * arr);
-  }
-  function capitalizar(str) {
-    return str.substr(0, 1).toUpperCase() + str.substr(1);
-  }
-  function randName(n) {
-    var fonemas = "a i u e o ka ki ku ke ko ha hi ho he hu ta chi tu te to na ni nu ne no sa shi so tsu wa ma me mi mo".split(" ");
-    var jstr = "";
-    if (!n)
-      n = rand(2) + 2;
-    for (var i = 0; i < n; i++) {
-      jstr += rand(fonemas);
-    }
-    return capitalizar(jstr);
-  }
+  // mapa/TerrainRare.js
   function TerrainRare(o) {
     let w = 200, h = 200;
     if (o && o.w) {
@@ -29195,7 +29073,7 @@
     if (o.posY || o.posY == 0) {
     } else
       o.posY = -6;
-    let res = parseInt(w / 10);
+    let res = o.divs || parseInt(w / 10);
     const group = new Group();
     const geometry = new PlaneGeometry(w, h, res, res);
     let planePoints = [];
@@ -29205,7 +29083,6 @@
     let isBorder = true;
     for (let i = 0; i < vertices.length; i += 3) {
       if (vertices[i] == -w / 2 || vertices[i + 1] == -h / 2 || vertices[i] == w / 2 || vertices[i + 1] == h / 2) {
-        console.log(vertices[i], vertices[i + 1], vertices[i + 2]);
         vertices[i + 2] = -1;
       } else {
         vertices[i + 2] += Math.random() * rh;
@@ -29234,6 +29111,125 @@
     if (window.terrainCreated)
       window.terrainCreated(plane, planePoints);
     return plane;
+  }
+
+  // mapa/main.js
+  console.log("MAPA");
+  var active = true;
+  var [scene, camera, renderer] = setScene();
+  var ligths = setLights(three_module_exports, scene);
+  var clickableObjects = [];
+  var terrainWidth = 800;
+  var terrainDepth = 800;
+  var noiseHeight = 30;
+  var terrain = TerrainRare({ w: terrainWidth, h: terrainDepth, posY: 0, wire: false, noise: noiseHeight, divs: 10 });
+  var world = new Group();
+  world.add(terrain);
+  scene.add(world);
+  var terrain_raycaster = new Raycaster();
+  var down = new Vector3(0, -1, 0);
+  animate();
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+  console.log({ camera });
+  function getTerrainHeight(x, z) {
+    terrain_raycaster.set(new Vector3(x, 1e4, z), down);
+    const intersects2 = terrain_raycaster.intersectObject(terrain);
+    return intersects2.length > 0 ? intersects2[0].point.y : 0;
+  }
+  fetch("plantas.json").then((d) => d.json()).then((json) => plantasLoaded(json)).catch((e) => console.log(e));
+  function plantasLoaded(jsn) {
+    plantas = jsn;
+    console.log(JSON.stringify(plantas, false, 4));
+    const plantasGroup = new Group();
+    plantas.forEach((city) => {
+      city.y = getTerrainHeight(city.x, city.z);
+      let H = city.height || Math.random() * 30 + 30;
+      let mat = city.img ? bmpMaterial(city.img, () => {
+      }) : new MeshStandardMaterial({ color: city.color });
+      const cityMesh = new Mesh(new BoxGeometry(H / 2, H, H / 2, 32), mat);
+      cityMesh.position.set(city.x, city.y + H * 0.5, city.z);
+      cityMesh.userData.id = city.id;
+      clickableObjects.push(cityMesh);
+      const cityLabel = createTextLabel(city.name);
+      cityLabel.position.set(city.x, city.y + H * 1.2, city.z);
+      plantasGroup.add(cityMesh);
+      plantasGroup.add(cityLabel);
+    });
+    world.add(plantasGroup);
+  }
+  var controls = new FirstPersonControls(camera, renderer.domElement);
+  controls.lookSpeed = 0.01;
+  controls.movementSpeed = 3;
+  controls.lookVertical = false;
+  camera.position.set(0, 2, 10);
+  var raycaster = new Raycaster();
+  var mouse = new Vector2();
+  window.addEventListener("click", onClick, false);
+  function elementClicked(id) {
+    console.log("Elemento clickeado con ID:", id);
+    active = false;
+    let pp = Popup(plantas.filter((p) => p.id == id)[0]);
+    pp.querySelector(".closePop").addEventListener("click", clk);
+    function clk(e) {
+      pp.removeEventListener("click", clk);
+      pp.parentNode.removeChild(pp);
+      active = true;
+      animate(1);
+    }
+  }
+  function onClick(event) {
+    mouse.x = event.clientX / window.innerWidth * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    const intersects2 = raycaster.intersectObjects(clickableObjects);
+    if (intersects2.length > 0) {
+      const clicked = intersects2[0].object;
+      const id = clicked.userData.id;
+      elementClicked(id);
+    }
+  }
+  function createTextLabel(text) {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    canvas.width = 1024;
+    canvas.height = 256;
+    context.font = "italic 180px Arial";
+    context.fillStyle = "#222222";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText(text, canvas.width / 2, canvas.height / 2);
+    const texture = new CanvasTexture(canvas);
+    texture.minFilter = LinearFilter;
+    const spriteMaterial = new SpriteMaterial({ map: texture, transparent: true });
+    const sprite = new Sprite(spriteMaterial);
+    sprite.scale.set(10, 3, 1);
+    return sprite;
+  }
+  function animate() {
+    if (active) {
+    } else
+      return;
+    requestAnimationFrame(animate);
+    let yy = getTerrainHeight(camera.position.x, camera.position.z) + noiseHeight + 2;
+    camera.position.y = yy;
+    if (controls)
+      controls.update(1);
+    renderer.render(scene, camera);
+  }
+  function bmpMaterial(src, fn) {
+    const loader = new TextureLoader();
+    const texture = loader.load(src);
+    const tmaterial = new MeshPhongMaterial({
+      color: 16777215,
+      map: texture,
+      opacity: 1,
+      transparent: false
+    });
+    return tmaterial;
   }
 })();
 /**
