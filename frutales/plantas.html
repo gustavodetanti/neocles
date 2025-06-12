@@ -7,17 +7,14 @@
     body { margin: 0; font-family: sans-serif; }
     svg { background: #f0f0f0; display: block; }
     #editor {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: white;
-      border: 1px solid #ccc;
-      padding: 10px;
+      background: black;
+        padding: 10px;
       display: none;
-      width: 200px;
+      color:white;
+    
     }
     #editor input, #editor textarea {
-      width: 100%;
+ 
       margin-bottom: 5px;
     }
     .plant-group { cursor: pointer; }
@@ -26,16 +23,19 @@
   </style>
 </head>
 <body>
+
+
+
 <svg id="svgCanvas" width="100%"  viewBox="0 0 1240 1000">
 
 
 </svg>
 <div id="editor">
-  <label>Name: <input type="text" id="editName"></label><br>
-  <label>Color: <input type="color" id="editColor"></label><br>
-  <label>Data: <textarea id="editData"></textarea></label><br>
-  <button id="saveChanges">Save</button>
-</div>
+    <label>Name: <input type="text" id="editName"></label> 
+    <label>Color: <input type="color" id="editColor"></label> 
+    <label>Data: <textarea id="editData"></textarea></label> 
+    <button id="saveChanges">Save</button>
+  </div>
 <script>
   const svg = document.getElementById('svgCanvas');
   const editor = document.getElementById('editor');
