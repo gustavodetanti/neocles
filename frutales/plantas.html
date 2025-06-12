@@ -48,7 +48,7 @@
   let selectedPlant = null;
 
   async function loadPlants() {
-    const res = await fetch('plants.json');
+    const res = await fetch('plants.json?r='+Math.random());
     Plants = await res.json();
     renderPlants();
   }
@@ -152,7 +152,7 @@ createGrid(svg,12,10,100);
 
   function savePlants() {
 
-    return;
+    
     fetch('save_plants.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
