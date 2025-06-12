@@ -288,18 +288,7 @@ else
 }
 }
 
-function setKanaSize(val) {
-var hirElem = document.getElementById("hiragana");
-var katElem = document.getElementById("katakana");
-var romElem = document.getElementById("rom");
-if(hirElem)
-hirElem.style.fontSize = val+"px";
-if(katElem)
-katElem.style.fontSize = val+"px";
-if(romElem)
-romElem.style.fontSize = val+"px";
-}
-
+ 
 
 
 return {getHiragana,getKatakana}

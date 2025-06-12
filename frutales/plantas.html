@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plant Editor</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+    svg { background: #f0f0f0; display: block; }
+    #editor {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+      display: none;
+      width: 200px;
+    }
+    #editor input, #editor textarea {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    .plant-group { cursor: pointer; }
+  </style>
+</head>
+<body>
+<svg id="svgCanvas" width="1240" height="780" viewBox="0 0 1240 780"></svg>
+<div id="editor">
+  <label>Name: <input type="text" id="editName"></label><br>
+  <label>Color: <input type="color" id="editColor"></label><br>
+  <label>Data: <textarea id="editData"></textarea></label><br>
+  <button id="saveChanges">Save</button>
+</div>
+<script>
+  const svg = document.getElementById('svgCanvas');
+  const editor = document.getElementById('editor');
+  const editName = document.getElementById('editName');
+  const editColor = document.getElementById('editColor');
+  const editData = document.getElementById('editData');
+  const saveBtn = document.getElementById('saveChanges');
+
+  let Plants = [];
+  let selectedPlant = null;
+
+  async function loadPlants() {
+    const res = await fetch('plants.json');
+    Plants = await res.json();
+    renderPlants();
+  }
+
+  function renderPlants() {
+    svg.innerHTML = '';
+    Plants.forEach((plant, index) => {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('transform', `translate(${plant.x},${plant.y})`);
+      g.setAttribute('class', 'plant-group');
+      g.setAttribute('data-index', index);
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('r', 20);
+      circle.setAttribute('fill', plant.color);
+
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('y', 40);
+      text.setAttribute('text-anchor', 'middle');
+      text.textContent = plant.name;
+
+      g.appendChild(circle);
+      g.appendChild(text);
+      svg.appendChild(g);
+
+      enableDrag(g);
+      g.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectPlant(index);
+      });
+    });
+  }
+
+  function enableDrag(g) {
+    let offsetX, offsetY, index;
+
+    g.addEventListener('mousedown', (e) => {
+      index = g.getAttribute('data-index');
+      const plant = Plants[index];
+      offsetX = e.offsetX - plant.x;
+      offsetY = e.offsetY - plant.y;
+
+      function onMouseMove(e) {
+        plant.x = e.offsetX - offsetX;
+        plant.y = e.offsetY - offsetY;
+        g.setAttribute('transform', `translate(${plant.x},${plant.y})`);
+      }
+
+      function onMouseUp() {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+        savePlants();
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    });
+  }
+
+  function selectPlant(index) {
+    selectedPlant = Plants[index];
+    editName.value = selectedPlant.name;
+    editColor.value = selectedPlant.color;
+    editData.value = selectedPlant.data.join('\n');
+    editor.style.display = 'block';
+  }
+
+  saveBtn.addEventListener('click', () => {
+    if (selectedPlant) {
+      selectedPlant.name = editName.value;
+      selectedPlant.color = editColor.value;
+      selectedPlant.data = editData.value.split('\n');
+      renderPlants();
+      savePlants();
+      editor.style.display = 'none';
+    }
+  });
+
+  svg.addEventListener('dblclick', (e) => {
+    const name = prompt('Enter plant name:');
+    if (name) {
+      const color = prompt('Enter color (hex):', '#00ff00');
+      const newPlant = { name, x: e.offsetX, y: e.offsetY, color, data: [] };
+      Plants.push(newPlant);
+      renderPlants();
+      savePlants();
+    }
+  });
+
+  function savePlants() {
+    fetch('save_plants.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Plants)
+    });
+  }
+
+  loadPlants();
+</script>
+</body>
+</html>
