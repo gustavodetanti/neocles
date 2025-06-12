@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Frutales - invernadero</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+    svg { background: #f0f0f0; display: block; }
+    #editor {
+        position: absolute;
+      top: 10px;
+      left: 10px;
+      color:white;
+      background: rgba(0, 0, 0,0.7);
+      border: 1px solid #ccc;
+      padding: 10px;
+      display: none;
+      width: 200px;
+      font-size: 10px;
+    
+    }
+    #editor input, #editor textarea {
+        width: 95%;
+        color:#cccccc;
+      background: #222222;
+      margin-bottom: 5px;
+      margin:5px auto 5px auto;
+      padding: 4px;
+      border:none;
+      font-size: 10px;
+      border: 1px solid #666666;
+    }
+    .plant-group { cursor: pointer; }
+.closeBut{
+    position: absolute;
+    top:5px;right:5px;
+    padding: 5px;
+    background: #444444;
+    color:rgb(237, 234, 225);
+    font-size: 18px;
+}
+    svg text{font-size: 10px;}
+    input#editColor{
+      position: absolute;
+      top: 5px;
+      right:40px;
+      width:32px;
+      padding:0;
+
+    }
+
+
+    button#saveChanges{
+      margin:5px 5px 5px 0;
+      padding: 5px;
+    background: #444444;
+    color:rgb(237, 234, 225);
+    font-size: 14px;
+    }
+
+
+    footer{
+      margin: 0;
+      padding: 12px;
+      background-color: #222222;
+      color:white;
+
+    }
+  </style>
+</head>
+<body>
+
+
+
+<svg id="svgCanvas" width="100%"  viewBox="0 0 1240 1000"></svg>
+
+
+<div id="editor">
+    <button alt='cerrar' class='closeBut'>&times</button>
+    <img src='img/sign.jpeg' width='40px' class='drag-handle'>
+    <br><br>
+    <label>Especie: <input type="text" id="editName"></label> 
+    <label>Id: <input type="text" id="editId"></label> 
+
+   <input type="color" id="editColor"> 
+    <label>Info: <textarea id="editData"></textarea></label> 
+    <div class="galeria"></div>
+    <button id="saveChanges">Save</button>
+  </div>
+
+ 
+<footer>
+  <label>editable <input type='checkbox' id="modeBtn" ></input></label>
+ 
+</footer>
+
+
+
+
+
+
+
+<script type='module' src='js/frutales.main.js'>
+   
+   </script>
+
+
+</body>
+</html>
