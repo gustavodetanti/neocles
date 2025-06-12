@@ -139,6 +139,7 @@ createGrid(svg,12,10,100);
   });
 
   svg.addEventListener('dblclick', (e) => {
+      return;
     const name = prompt('Enter plant name:');
     if (name) {
       const color = prompt('Enter color (hex):', '#00ff00');
@@ -150,6 +151,8 @@ createGrid(svg,12,10,100);
   });
 
   function savePlants() {
+
+    return;
     fetch('save_plants.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
