@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Plant Editor</title>
+  <title>Pl </title>
   <style>
     body { margin: 0; font-family: sans-serif; }
     svg { background: #f0f0f0; display: block; }
@@ -21,10 +21,15 @@
       margin-bottom: 5px;
     }
     .plant-group { cursor: pointer; }
+
+    svg text{font-size: 10px;}
   </style>
 </head>
 <body>
-<svg id="svgCanvas" width="1240" height="780" viewBox="0 0 1240 780"></svg>
+<svg id="svgCanvas" width="100%"  viewBox="0 0 1240 1000">
+
+
+</svg>
 <div id="editor">
   <label>Name: <input type="text" id="editName"></label><br>
   <label>Color: <input type="color" id="editColor"></label><br>
@@ -50,6 +55,17 @@
 
   function renderPlants() {
     svg.innerHTML = '';
+
+
+
+
+
+
+    
+drawAccidents(svg);
+createGrid(svg,12,10,100);
+
+
     Plants.forEach((plant, index) => {
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       g.setAttribute('transform', `translate(${plant.x},${plant.y})`);
@@ -57,11 +73,11 @@
       g.setAttribute('data-index', index);
 
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('r', 20);
+      circle.setAttribute('r', 12);
       circle.setAttribute('fill', plant.color);
 
       const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      text.setAttribute('y', 40);
+      text.setAttribute('y', 30);
       text.setAttribute('text-anchor', 'middle');
       text.textContent = plant.name;
 
@@ -142,6 +158,76 @@
   }
 
   loadPlants();
+
+
+
+
+
+
+
+
+
+
+  function createGrid(svg,cols,rows,size){
+ 
+ 
+// Add grid lines
+for (let x = 0; x <= cols*size; x += size) {
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  line.setAttribute("d", `M${x},0 L${x},${rows*size}`);
+  line.setAttribute("stroke", "#ccc");
+  line.setAttribute("stroke-width", "1");
+  svg.appendChild(line);
+}
+
+for (let y = 0; y <= rows*size; y += size) {
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  line.setAttribute("d", `M0,${y} L${cols*size},${y}`);
+  line.setAttribute("stroke", "#ccc");
+  line.setAttribute("stroke-width", "1");
+  svg.appendChild(line);
+}
+
+// Add clickable squares
+for (let x = 0; x < cols; x++) {
+  for (let y = 0; y < rows; y++) {
+    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", x * size);
+    rect.setAttribute("y", y * size);
+    rect.setAttribute("width", size);
+    rect.setAttribute("height", size);
+    rect.setAttribute("fill", "transparent");
+    rect.setAttribute("data-pos", `${x} ${y}`);
+    svg.appendChild(rect);
+  }
+}
+//div.appendChild(svg);
+    }
+
+
+
+function drawAccidents(svg){
+    let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", 590);
+    rect.setAttribute("y", 180);
+    rect.setAttribute("width", 30);
+    rect.setAttribute("height", 130);
+    rect.setAttribute("fill", "#dddddd");
+   
+    svg.appendChild(rect);
+
+    let rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect1.setAttribute("x", 0);
+    rect1.setAttribute("y", 680);
+    rect1.setAttribute("width", 1240);
+    rect1.setAttribute("height", 30);
+    rect1.setAttribute("fill", "#aa8800");
+    svg.appendChild(rect1);
+
+
+}
+
+
 </script>
 </body>
 </html>
