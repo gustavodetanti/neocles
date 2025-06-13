@@ -1,5 +1,6 @@
 //import { buildings } from "./buildings.js";
 import { EditorDragging } from "./EditorDragging.js";
+import { Messages } from "./Messages.js";
 
 let EDITMODE=false;
 
@@ -18,6 +19,8 @@ function APP(){
   const saveBtn = document.getElementById('saveChanges');
   const modeBtn = document.getElementById('modeBtn');
 let plantGallery=editor.querySelector('.galeria');
+let msgs=editor.querySelector('.msgs');
+
   let Plants = [];
   let selectedPlant = null;
 
@@ -49,7 +52,7 @@ for(let e in especies){
 drawAccidents(svg);
 createGrid(svg,12,10,100);
 objetosApp(svg);
-
+ 
     Plants.forEach((plant, index) => {
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       g.setAttribute('transform', `translate(${plant.x},${plant.y})`);
@@ -71,7 +74,13 @@ objetosApp(svg);
 
       enableDrag(g);
       g.addEventListener('click', (e) => {
+        console.log(circle);
+   
         e.stopPropagation();
+        if(svg.querySelector('circle.selected'))
+        svg.querySelector('circle.selected').setAttribute('class',"b");
+       
+        circle.setAttribute('class',"selected");
         selectPlant(index);
       });
     });
@@ -116,6 +125,15 @@ objetosApp(svg);
         plantGallery.innerHTML=``;
    
     }
+
+     if(selectedPlant.msgs){
+Messages(msgs,selectedPlant,savePlants);
+
+     } else {
+      selectedPlant.msgs=[];
+      Messages(msgs,selectedPlant,savePlants);
+    
+     }
     editor.style.display = 'block';
   }
 
@@ -161,11 +179,14 @@ modeBtn.addEventListener('change',()=>{
 // Checkbox is checked
   function savePlants() {
 
-if(!EDITMODE)return;    
+if(!EDITMODE)return;   
+console.log('saving...'); 
     fetch('save_plants.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(Plants)
+    }).then(d=>{
+      console.log('saved');
     });
   }
 
