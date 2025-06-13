@@ -54,37 +54,47 @@ createGrid(svg,12,10,100);
 objetosApp(svg);
  
     Plants.forEach((plant, index) => {
-      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      g.setAttribute('transform', `translate(${plant.x},${plant.y})`);
-      g.setAttribute('class', 'plant-group');
-      g.setAttribute('data-index', index);
-
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('r', 12);
-      circle.setAttribute('fill', plant.color);
-
-      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      text.setAttribute('y', 20);
-      text.setAttribute('text-anchor', 'middle');
-      text.textContent = plant.name;
-
-      g.appendChild(circle);
-      g.appendChild(text);
-      svg.appendChild(g);
-
-      enableDrag(g);
-      g.addEventListener('click', (e) => {
-        console.log(circle);
-   
-        e.stopPropagation();
-        if(svg.querySelector('circle.selected'))
-        svg.querySelector('circle.selected').setAttribute('class',"b");
-       
-        circle.setAttribute('class',"selected");
-        selectPlant(index);
-      });
-    });
+    Plant(plant,index);
+    }
+    );
   }
+
+
+function Plant(plant,index){
+  const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  g.setAttribute('transform', `translate(${plant.x},${plant.y})`);
+  g.setAttribute('class', 'plant-group');
+  g.setAttribute('data-index', index);
+
+  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('r', 12);
+  circle.setAttribute('fill', plant.color);
+
+  const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('y', 20);
+  text.setAttribute('text-anchor', 'middle');
+  text.textContent = plant.name;
+
+  g.appendChild(circle);
+  g.appendChild(text);
+  svg.appendChild(g);
+
+  enableDrag(g);
+  g.addEventListener('click', gClk);
+
+  function gClk(e) {
+    console.log(circle);
+
+    e.stopPropagation();
+    if(svg.querySelector('circle.selected'))
+    svg.querySelector('circle.selected').setAttribute('class',"b");
+   
+    circle.setAttribute('class',"selected");
+    selectPlant(index);
+  }
+
+}
+
 
   function enableDrag(g) {
     let offsetX, offsetY, index;
