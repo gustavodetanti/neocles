@@ -1,5 +1,10 @@
 //import { buildings } from "./buildings.js";
+import { downloadSVG } from "./downloadSVG.js";
+import { downloadSVGasJPG } from "./downloadSVGasJPG.js";
+
 import { EditorDragging } from "./EditorDragging.js";
+import { iconImage } from "./iconImage.js";
+import { ImagesComp } from "./ImagesComp.js";
 import { Messages } from "./Messages.js";
 
 let EDITMODE=false;
@@ -18,11 +23,21 @@ function APP(){
   const editData = document.getElementById('editData');
   const saveBtn = document.getElementById('saveChanges');
   const modeBtn = document.getElementById('modeBtn');
+
+
+const downloadImageBut=document.getElementById('downloadImageBut');
+
+
+
 let plantGallery=editor.querySelector('.galeria');
 let msgs=editor.querySelector('.msgs');
 
+
+
   let Plants = [];
   let selectedPlant = null;
+
+
 
   async function loadPlants() {
     const res = await fetch('plants.json?r='+Math.random());
@@ -30,28 +45,31 @@ let msgs=editor.querySelector('.msgs');
     renderPlants();
   }
 
+
+
   function renderPlants() {
-    let especies={};
-Plants.forEach((plant, index) => {
-//plant.y=plant.y-100;
-//plant.x=1240-plant.x;
-if(especies[plant.name])especies[plant.name]++;
-else especies[plant.name]=1;
+
+
+  let especies = {};
+    Plants.forEach((plant, index) => {
+      if (especies[plant.name]) especies[plant.name]++;
+      else especies[plant.name] = 1;
     });
- 
+  console.log(JSON.stringify(especies, false, 4));
+
 
 
 svg.innerHTML = '';
-console.log(Plants.length,"plants.json loaded");
-//console.log(JSON.stringify(Plants,false,4));
-for(let e in especies){
-  console.log(e,especies[e]);
-}
+console.log(Plants.length,"plants loaded from plants.json");
+ 
+ 
 
     
 drawAccidents(svg);
-createGrid(svg,12,10,100);
-objetosApp(svg);
+createGrid(svg,13,10,100);
+
+
+//objetosApp(svg);
  
     Plants.forEach((plant, index) => {
     Plant(plant,index);
@@ -67,7 +85,7 @@ function Plant(plant,index){
   g.setAttribute('data-index', index);
 
   const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-  circle.setAttribute('r', 12);
+  circle.setAttribute('r', plant.size||12);
   circle.setAttribute('fill', plant.color);
 
   const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -75,7 +93,25 @@ function Plant(plant,index){
   text.setAttribute('text-anchor', 'middle');
   text.textContent = plant.name;
 
+
+
+
+  let PL=plant.img;
+  if(PL){} else {
+    if(plant.fotos && plant.fotos.length){
+      PL=plant.fotos[0];
+    } 
+
+  }
+if(PL){
+
+iconImage(g,PL,-20,-30);
+
+} else{
   g.appendChild(circle);
+
+}
+
   g.appendChild(text);
   svg.appendChild(g);
 
@@ -122,6 +158,79 @@ function Plant(plant,index){
     });
   }
 
+  function _enableDrag(g) {
+    let offsetX, offsetY, index;
+    let isTouchDevice = ('ontouchstart' in window);
+
+    function startDrag(clientX, clientY) {
+        const rect = g.getBoundingClientRect();
+        index = g.getAttribute('data-index');
+        const plant = Plants[index];
+        
+        offsetX = clientX - rect.left - plant.x;
+        offsetY = clientY - rect.top - plant.y;
+    }
+
+    function moveDrag(clientX, clientY) {
+        const rect = g.parentNode.getBoundingClientRect();
+        const plant = Plants[index];
+        
+        plant.x = clientX - rect.left - offsetX;
+        plant.y = clientY - rect.top - offsetY;
+        g.setAttribute('transform', `translate(${plant.x},${plant.y})`);
+    }
+
+    function endDrag() {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+        document.removeEventListener('touchmove', onTouchMove);
+        document.removeEventListener('touchend', onTouchEnd);
+        savePlants();
+    }
+
+    // Mouse event handlers
+    function onMouseDown(e) {
+        e.preventDefault();
+        startDrag(e.clientX, e.clientY);
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    }
+
+    function onMouseMove(e) {
+        moveDrag(e.clientX, e.clientY);
+    }
+
+    function onMouseUp() {
+        endDrag();
+    }
+
+    // Touch event handlers
+    function onTouchStart(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        startDrag(touch.clientX, touch.clientY);
+        document.addEventListener('touchmove', onTouchMove, { passive: false });
+        document.addEventListener('touchend', onTouchEnd);
+    }
+
+    function onTouchMove(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        moveDrag(touch.clientX, touch.clientY);
+    }
+
+    function onTouchEnd() {
+        endDrag();
+    }
+
+    // Add appropriate event listeners
+    if (isTouchDevice) {
+        g.addEventListener('touchstart', onTouchStart, { passive: false });
+    } else {
+        g.addEventListener('mousedown', onMouseDown);
+    }
+}
+
   function selectPlant(index) {
     selectedPlant = Plants[index];
     editName.value = selectedPlant.name;
@@ -129,15 +238,18 @@ function Plant(plant,index){
     
     editColor.value = selectedPlant.color;
     editData.value = selectedPlant.data;
+    plantGallery.innerHTML=``;
     if(selectedPlant.img){
-        plantGallery.innerHTML=`<img style='width:100%;' src='${selectedPlant.img}'>`;
-    } else {
-        plantGallery.innerHTML=``;
+     //   plantGallery.innerHTML=`<img style='width:100%;' src='${selectedPlant.img}'>`;
+    }  
+
+ let IC=ImagesComp(plantGallery,selectedPlant,savePlants);
    
-    }
+
+
 
      if(selectedPlant.msgs){
-Messages(msgs,selectedPlant,savePlants);
+Messages(msgs, selectedPlant, savePlants );
 
      } else {
       selectedPlant.msgs=[];
@@ -149,6 +261,14 @@ Messages(msgs,selectedPlant,savePlants);
 
 
 modeBtn.addEventListener('change',()=>{
+
+});
+
+downloadImageBut.addEventListener("click",(e)=>{
+
+  downloadSVGasJPG(svg);
+
+
 
 });
 
@@ -181,6 +301,7 @@ modeBtn.addEventListener('change',()=>{
       savePlants();
     }
   });
+  modeBtn.checked=EDITMODE;
   modeBtn.addEventListener('change', function() {
     EDITMODE=modeBtn.checked;
 });
@@ -292,7 +413,7 @@ bg.setAttribute("fill",`#00aa0055`);
 g.appendChild(bg);
 
 console.log('objetos disabled');
-//buildings(g);
+ buildings(g);
 
 
 }
@@ -300,5 +421,11 @@ console.log('objetos disabled');
 
 
 document.addEventListener('DOMContentLoaded', EditorDragging);
+
+
+
+
+
+
 
 
