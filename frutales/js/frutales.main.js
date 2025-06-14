@@ -260,9 +260,7 @@ Messages(msgs, selectedPlant, savePlants );
   }
 
 
-modeBtn.addEventListener('change',()=>{
 
-});
 
 downloadImageBut.addEventListener("click",(e)=>{
 
@@ -413,7 +411,7 @@ bg.setAttribute("fill",`#00aa0055`);
 g.appendChild(bg);
 
 console.log('objetos disabled');
- buildings(g);
+ //buildings(g);
 
 
 }

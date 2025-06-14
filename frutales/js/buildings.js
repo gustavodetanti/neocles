@@ -1,4 +1,8 @@
 export function buildings(svgElement) {
+
+
+
+    
     // Create toolbar
     const toolbar = document.createElement('div');
     toolbar.style.position = 'absolute';
