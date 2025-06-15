@@ -70,6 +70,10 @@ export function ImagesComp(divElement, obj,saveFn) {
 if(filetodel) borrarArchivo(filetodel)
 
     }
+
+
+
+
     function borrarArchivo(filetodel){
         const formData = new FormData();
         formData.append('filetodel', filetodel);
@@ -128,6 +132,8 @@ if(filetodel) borrarArchivo(filetodel)
     function uploadImage(file) {
         const formData = new FormData();
         formData.append('image', file);
+        formData.append('prefix',obj.name||'plant' );
+        
         
         fetch('upload.php', {
             method: 'POST',
@@ -181,17 +187,8 @@ if(filetodel) borrarArchivo(filetodel)
 function setLoading(bol){
     let ld=document.querySelector('.LOADING');
     if(bol){
-
-if(ld){} else{ 
-ld=document.createElement('div');
-ld.innerHTML="<h2>subiendo imagen...</h2>"
-ld.classList.add('LOADING');
-document.body.appendChild(ld)
-}
-ld.style.display="block";
-} else {
-if(ld){document.body.removeChild(ld);}
-}
-
+        ld.style.display="block";}
+        else ld.style.display="none";
+ 
 
 }

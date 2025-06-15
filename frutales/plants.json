@@ -1,1 +1,505 @@
-[{"id":"id","name":"limonero","x":1057,"y":112,"color":"#cbbb10","data":"","fotos":[],"msgs":[]},{"id":"id","name":"naranjo","x":1149,"y":91,"color":"#ffba42","size":"22","fotos":["fotos/naranjo.jpg"],"data":"","msgs":[{"user":"gus","msg":"la foto no es real","date":"13/06/2025, 13:19"}]},{"id":"id","name":"naranjo","x":981,"y":128,"color":"#cb6a10","data":"naranjo 1","fotos":[],"msgs":[]},{"id":"id","name":"membrillo","x":886,"y":141,"color":"#dece21","data":"","fotos":[],"msgs":[]},{"id":"id","name":"pomelo","x":767,"y":150,"color":"#00ff00","data":"","msgs":[],"fotos":[]},{"id":"id","name":"naranjo","x":574,"y":149,"color":"#cb6a10","data":"","fotos":[],"msgs":[]},{"id":"id","name":"manzano","x":364,"y":122,"color":"#cb104e","data":"","fotos":[],"msgs":[]},{"id":"id","name":"manzano","x":267,"y":116,"color":"#cb104e","data":"","msgs":[]},{"id":"id","name":"cedron","x":136,"y":141,"color":"#00ff00","data":"","fotos":[],"msgs":[]},{"id":"id","name":"kinoto","x":1087,"y":231,"color":"#f7a436","data":"","msgs":[],"fotos":[]},{"id":"id","name":"kinoto","x":1006,"y":233,"color":"#f7a436","data":"","fotos":[],"msgs":[]},{"id":"id","name":"manzano","x":784,"y":278,"color":"#cb104e","data":""},{"id":"id","name":"ciruelo","x":654,"y":270,"color":"#00ff00","data":"","fotos":[],"msgs":[]},{"id":"id","name":"limonero","x":591,"y":318,"color":"#cbbb10","data":""},{"id":"id","name":"duraznero","x":301,"y":281,"color":"#cb9010","data":""},{"id":"id","name":"guayaba","x":111,"y":234,"color":"#0d4d10","data":"","msgs":[]},{"id":"id","name":"kaqui","x":201,"y":368,"color":"#cb3c10","data":""},{"id":"id","name":"manzano","x":131,"y":388,"color":"#cb104e","data":""},{"id":"id","name":"citrico","x":404,"y":346,"color":"#00ff00","data":"qué citrico es?","fotos":[],"msgs":[]},{"id":"id","name":"mandarino","x":939,"y":331,"color":"#00ff00","data":"","fotos":[],"msgs":[]},{"id":"id","name":"manzano","x":506,"y":292,"color":"#cb104e","data":""},{"id":"id","name":"manzano","x":845,"y":372,"color":"#cb104e","data":""},{"id":"id","name":"manzano","x":798,"y":423,"color":"#cb104e","data":""},{"id":"id","name":"manzano","x":819,"y":516,"color":"#cb104e","data":""},{"id":"id","name":"limonero","x":970,"y":448,"color":"#cbbb10","data":""},{"id":"id","name":"limonero","x":1036,"y":513,"color":"#cbbb10","data":""},{"id":"id","name":"manzano","x":844,"y":586,"color":"#cb104e","data":""},{"id":"id","name":"membrillo","x":920,"y":630,"color":"#dece21","data":""},{"id":"id","name":"membrillo","x":973,"y":673,"color":"#dece21","data":""},{"id":"id","name":"parral","x":681,"y":566,"color":"#6110cb","data":""},{"id":"id","name":"parral","x":582,"y":563,"color":"#6110cb","data":""},{"id":"id","name":"cerezo","x":470,"y":547,"color":"#a910cb","data":""},{"id":"id","name":"cerezo","x":496,"y":463,"color":"#a910cb","data":""},{"id":"id","name":"duraznero","x":332,"y":376,"color":"#cb9010","data":""},{"id":"id","name":"pecan","x":78,"y":790,"color":"#00ff00","data":"","fotos":[],"msgs":[]},{"id":"id","name":"guayaba","x":68,"y":578,"color":"#0d4d10","data":""},{"id":"id","name":"duraznero","x":160,"y":510,"color":"#cb9010","data":""},{"id":"id","name":"manzano","x":245,"y":478,"color":"#cb104e","data":""},{"id":"id","name":"higuera","x":442,"y":704,"color":"#00ff00","data":""},{"id":"id","name":"higuera","x":434,"y":828,"color":"#00ff00","data":""},{"id":"id","name":"higuera","x":304,"y":875,"color":"#00ff00","data":""},{"id":"id","name":"higuera","x":292,"y":826,"color":"#00ff00","data":[""]},{"id":"id","name":"higuera","x":247,"y":843,"color":"#00ff00","data":""},{"id":"id","name":"guayaba","x":161,"y":860,"color":"#0d4d10","data":""},{"id":"id","name":"naranjo","x":473,"y":874,"color":"#cb6a10","data":""},{"id":"id","name":"limonero","x":638,"y":802,"color":"#cbbb10","data":""},{"id":"id","name":"kinoto","x":620,"y":765,"color":"#f7a436","data":""},{"id":"id","name":"higuera","x":711,"y":758,"color":"#00ff00","data":""},{"id":"CAÑAS x","name":"CAÑAS","x":994,"y":824,"size":50,"color":"#3b5f21","data":"","fotos":[],"msgs":[]}]
+{
+    "name": "invernadero","bg":"bg.jpg",
+    "plants": [
+    {
+        "id": "id",
+        "name": "limonero",
+        "x": 1050,
+        "y": 287,
+        "color": "#cbbb10",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "naranjo",
+        "x": 1112,
+        "y": 285,
+        "color": "#ffba42",
+        "size": "22",
+        "fotos": [
+            "fotos/naranjo.jpg"
+        ],
+        "data": "",
+        "msgs": [
+            {
+                "user": "gus",
+                "msg": "la foto no es real",
+                "date": "13/06/2025, 13:19"
+            }
+        ]
+    },
+    {
+        "id": "id",
+        "name": "naranjo",
+        "x": 985,
+        "y": 271,
+        "color": "#cb6a10",
+        "data": "naranjo 1",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "membrillo",
+        "x": 876,
+        "y": 222,
+        "color": "#dece21",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "pomelo",
+        "x": 761,
+        "y": 222,
+        "color": "#00ff00",
+        "data": "",
+        "msgs": [],
+        "fotos": []
+    },
+    {
+        "id": "id",
+        "name": "naranjo",
+        "x": 634,
+        "y": 186,
+        "color": "#cb6a10",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "manzano",
+        "x": 546,
+        "y": 142,
+        "color": "#cb104e",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "manzano",
+        "x": 451,
+        "y": 141,
+        "color": "#cb104e",
+        "data": "",
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "cedron",
+        "x": 354,
+        "y": 168,
+        "color": "#00ff00",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "kinoto",
+        "x": 1027,
+        "y": 401,
+        "color": "#f7a436",
+        "data": "",
+        "msgs": [],
+        "fotos": []
+    },
+    {
+        "id": "id",
+        "name": "kinoto",
+        "x": 972,
+        "y": 393,
+        "color": "#f7a436",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "manzano",
+        "x": 758,
+        "y": 395,
+        "color": "#cb104e",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "ciruelo",
+        "x": 512,
+        "y": 358,
+        "color": "#00ff00",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "limonero",
+        "x": 554,
+        "y": 501,
+        "color": "#cbbb10",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "duraznero",
+        "x": 220,
+        "y": 471,
+        "color": "#cb9010",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "guayaba",
+        "x": 189,
+        "y": 236,
+        "color": "#0d4d10",
+        "data": "",
+        "msgs": [],
+        "fotos": []
+    },
+    {
+        "id": "id",
+        "name": "kaqui",
+        "x": 233,
+        "y": 358,
+        "color": "#cb3c10",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "manzano",
+        "x": 248,
+        "y": 289,
+        "color": "#cb104e",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "citrico",
+        "x": 384,
+        "y": 463,
+        "color": "#00ff00",
+        "data": "qué citrico es?",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "mandarino",
+        "x": 918,
+        "y": 502,
+        "color": "#00ff00",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "manzano",
+        "x": 418,
+        "y": 387,
+        "color": "#cb104e",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "manzano",
+        "x": 788,
+        "y": 488,
+        "color": "#cb104e",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "manzano",
+        "x": 726,
+        "y": 570,
+        "color": "#cb104e",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "manzano",
+        "x": 709,
+        "y": 639,
+        "color": "#cb104e",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "limonero",
+        "x": 863,
+        "y": 573,
+        "color": "#cbbb10",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "limonero",
+        "x": 862,
+        "y": 662,
+        "color": "#cbbb10",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "manzano",
+        "x": 806,
+        "y": 733,
+        "color": "#cb104e",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "membrillo",
+        "x": 686,
+        "y": 859,
+        "color": "#dece21",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "membrillo",
+        "x": 761,
+        "y": 801,
+        "color": "#dece21",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "parral",
+        "x": 559,
+        "y": 797,
+        "color": "#6110cb",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "parral",
+        "x": 479,
+        "y": 774,
+        "color": "#6110cb",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "cerezo",
+        "x": 400,
+        "y": 738,
+        "color": "#a910cb",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "cerezo",
+        "x": 465,
+        "y": 673,
+        "color": "#a910cb",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "duraznero",
+        "x": 344,
+        "y": 610,
+        "color": "#cb9010",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "pecan",
+        "x": 259,
+        "y": 792,
+        "color": "#00ff00",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "guayaba",
+        "x": 221,
+        "y": 633,
+        "color": "#0d4d10",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "duraznero",
+        "x": 314,
+        "y": 687,
+        "color": "#cb9010",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "manzano",
+        "x": 285,
+        "y": 537,
+        "color": "#cb104e",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "higuera",
+        "x": 285,
+        "y": 1009,
+        "color": "#00ff00",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "higuera",
+        "x": 345,
+        "y": 1224,
+        "color": "#00ff00",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "higuera",
+        "x": 335,
+        "y": 1300,
+        "color": "#00ff00",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "higuera",
+        "x": 330,
+        "y": 1156,
+        "color": "#00ff00",
+        "data": [
+            ""
+        ],
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "higuera",
+        "x": 305,
+        "y": 1084,
+        "color": "#00ff00",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "guayaba",
+        "x": 283,
+        "y": 903,
+        "color": "#0d4d10",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "naranjo",
+        "x": 355,
+        "y": 1375,
+        "color": "#cb6a10",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "limonero",
+        "x": 490,
+        "y": 1264,
+        "color": "#cbbb10",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "kinoto",
+        "x": 429,
+        "y": 1236,
+        "color": "#f7a436",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "id",
+        "name": "higuera",
+        "x": 535,
+        "y": 1216,
+        "color": "#00ff00",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    },
+    {
+        "id": "CAÑAS x",
+        "name": "CAÑAS",
+        "x": 860,
+        "y": 1175,
+        "size": 50,
+        "color": "#bae29d",
+        "data": "",
+        "fotos": [],
+        "msgs": []
+    }
+]}

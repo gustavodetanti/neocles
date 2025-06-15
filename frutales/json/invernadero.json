@@ -1,0 +1,15 @@
+{
+    "name": "invernadero",
+    "plants": [
+        {
+            "id": "id",
+            "name": "limonero",
+            "x": 1020,
+            "y": 357,
+            "color": "#cbbb10",
+            "data": "",
+            "fotos": [],
+            "msgs": []
+        }
+    ]
+}

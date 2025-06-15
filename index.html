@@ -9,12 +9,83 @@
     <meta name="keywords"
       content="web developer, JavaScript, Three.js, CSS, HTML5, front-end development, design and illustration">
     <meta name="author" content="Gustavo De Tanti">
-
+<style>
+  body{
+    margin: 0;
+  
+  }
+  img.bg{
+    position: absolute;
+    z-index: -1;
+    width:100vw;
+    top:0;left:0;
+  }
+</style>
  	 
 		</head>
 
 		<body>
-   
+   <img class='bg' src='bg.png'>
  NEOC
+
+ <script>
+
+const container = document.body;
+AddCircles(container, {
+    count: 5,
+    minSize: 300,
+    maxSize: 480,
+    colors: ['#000000']
+});
+
+  function AddCircles(element, options = {}) {
+    let ratio=2;
+    // Default options
+    const defaults = {
+        count: 10,          // Number of circles
+        minSize: 120,        // Minimum circle size (px)
+        maxSize: 600,       // Maximum circle size (px)
+        colors: [          // Array of possible colors
+            '#111111'
+        ]
+    };
+    
+    // Merge user options with defaults
+    const config = { ...defaults, ...options };
+    let EW=element.clientWidth;
+    let EH=EW*ratio;
+    
+    // Create circles
+    for (let i = 0; i < config.count; i++) {
+        const circle = document.createElement('div');
+        
+        // Random size
+        const size = Math.floor(
+            Math.random() * (config.maxSize - config.minSize + 1) 
+        ) + config.minSize;
+        
+        // Random position (within container bounds)
+        const posX = Math.random() * (EW - size);
+        const posY = Math.random() * (EH - size);
+        
+        // Random color
+        const color = config.colors[
+            Math.floor(Math.random() * config.colors.length)
+        ];
+        
+        // Apply styles
+        circle.style.position = 'absolute';
+        circle.style.width = `${size}px`;
+        circle.style.height = `${size}px`;
+        circle.style.borderRadius = '50%';
+        circle.style.backgroundColor = color;
+        circle.style.left = `${posX}px`;
+        circle.style.top = `${posY}px`;
+        
+        // Add to container
+        element.appendChild(circle);
+    }
+}
+ </script>
  	</body>
 </html>

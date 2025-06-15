@@ -11,7 +11,7 @@
   <meta name="keywords"
     content="csa">
   <meta name="author" content="">
-<link rel="stylesheet" href='frutales.css?r=R4'>
+<link rel="stylesheet" href='frutales.css?r=R7'>
 
  
 </head>
@@ -20,15 +20,16 @@
 
 
 
-  <svg id="svgCanvas" viewBox="0 0 1240 1000"></svg>
+  <svg id="svgCanvas" ></svg>
+  <div id="svgRats" style='position: absolute;top:0;width:100vw;'></div>
 
 
   <div id="editor">
     <button alt='cerrar' class='closeBut'>&times</button>
-    <img src='img/sign.jpeg' width='40px' class='drag-handle'>
+    <img src='img/sign.jpeg' width='40px' class='drag-handle'> <small></small>
 
-
-    <div class='flex'>
+<h3 class='toggle-info'>+ Info</h3>
+    <div class='flex hidded'>
       <div>
         <label>Especie: <input type="text" id="editName"></label>
         <label>Id: <input type="text" id="editId"></label>
@@ -47,6 +48,14 @@
     </div>
   </div>
 
+
+
+
+  
+
+
+<div class="LOADING"><h3>loading...</h3></div>
+
     <footer>
       <label>editable <input type='checkbox' id="modeBtn"></input></label> . 
       <button id='downloadImageBut'>download</button>
@@ -59,7 +68,7 @@
 
 
 
-    <script type='module' src='js/frutales.main.js?r=R4'>
+    <script type='module' src='js/frutales.main.js?r=R7'>
 
     </script>
 

@@ -7,7 +7,7 @@ export function EditorDragging() {
     let isDragging = false;
     let offsetX, offsetY;
 
- 
+ dragHandle.style.cursor = 'grabbing';
     dragHandle.addEventListener('mousedown', function (e) {
         if (e)
             e.preventDefault();
@@ -16,9 +16,8 @@ export function EditorDragging() {
         offsetX = e.clientX - editor.getBoundingClientRect().left;
         offsetY = e.clientY - editor.getBoundingClientRect().top;
  
-        document.body.style.cursor = 'grabbing';
-        editor.style.cursor = 'grabbing';
-        editor.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.9)';
+        //document.body.style.cursor = 'grabbing';
+         editor.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.9)';
         editor.style.opacity = '0.95';
     });
  
@@ -46,8 +45,8 @@ export function EditorDragging() {
         if (isDragging) {
             isDragging = false;
  
-            document.body.style.cursor = '';
-            editor.style.cursor = 'move';
+            //document.body.style.cursor = '';
+            //editor.style.cursor = 'move';
             editor.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.7)';
             editor.style.opacity = '1';
         }

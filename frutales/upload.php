@@ -1,6 +1,12 @@
 <?php
 header('Content-Type: application/json');
 
+$prefix='plant';
+if(isset($_REQUEST['prefix'])){
+    $prefix=$_REQUEST['prefix'];
+
+}
+
 
 if(isset($_REQUEST['filetodel'])){
 $ftd=$_REQUEST['filetodel'];
@@ -38,7 +44,7 @@ try {
 
     // Generate unique filename
     $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-    $fileName = uniqid() . '.' . strtolower($extension);
+    $fileName = $prefix."_".uniqid() . '.' . strtolower($extension);
     $targetFile = $targetDir . $fileName;
 
     // Validate image
@@ -53,20 +59,85 @@ try {
     }
 
     // Verify image content
-    if (!getimagesize($_FILES['image']['tmp_name'])) {
+    $imageInfo = getimagesize($_FILES['image']['tmp_name']);
+    if (!$imageInfo) {
         throw new Exception('Uploaded file is not a valid image');
     }
 
-    // Move uploaded file
-    if (!move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
-        throw new Exception('Failed to move uploaded file');
+    // Check if resizing is needed (width > 1024px)
+    $maxWidth = 1024;
+    list($originalWidth, $originalHeight) = $imageInfo;
+
+    if ($originalWidth > $maxWidth) {
+        // Calculate new height while maintaining aspect ratio
+        $newWidth = $maxWidth;
+        $newHeight = (int) ($originalHeight * ($maxWidth / $originalWidth));
+
+        // Create image resource based on file type
+        switch (strtolower($extension)) {
+            case 'jpg':
+            case 'jpeg':
+                $sourceImage = imagecreatefromjpeg($_FILES['image']['tmp_name']);
+                break;
+            case 'png':
+                $sourceImage = imagecreatefrompng($_FILES['image']['tmp_name']);
+                break;
+            case 'gif':
+                $sourceImage = imagecreatefromgif($_FILES['image']['tmp_name']);
+                break;
+            case 'webp':
+                $sourceImage = imagecreatefromwebp($_FILES['image']['tmp_name']);
+                break;
+            default:
+                throw new Exception('Unsupported image type for resizing');
+        }
+
+        // Create new image
+        $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+
+        // Preserve transparency for PNG and GIF
+        if ($extension === 'png' || $extension === 'gif') {
+            imagecolortransparent($resizedImage, imagecolorallocatealpha($resizedImage, 0, 0, 0, 127));
+            imagealphablending($resizedImage, false);
+            imagesavealpha($resizedImage, true);
+        }
+
+        // Resize the image
+        imagecopyresampled($resizedImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight);
+
+        // Save the resized image
+        switch (strtolower($extension)) {
+            case 'jpg':
+            case 'jpeg':
+                imagejpeg($resizedImage, $targetFile, 90);
+                break;
+            case 'png':
+                imagepng($resizedImage, $targetFile, 9);
+                break;
+            case 'gif':
+                imagegif($resizedImage, $targetFile);
+                break;
+            case 'webp':
+                imagewebp($resizedImage, $targetFile, 90);
+                break;
+        }
+
+        // Free memory
+        imagedestroy($sourceImage);
+        imagedestroy($resizedImage);
+    } else {
+        // No resizing needed, just move the file
+        if (!move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+            throw new Exception('Failed to move uploaded file');
+        }
     }
 
     // Return success
     echo json_encode([
         'success' => true,
         'filePath' => $targetFile,
-        'fileName' => $fileName
+        'fileName' => $fileName,
+        'resized' => ($originalWidth > $maxWidth)
     ]);
 
 } catch (Exception $e) {

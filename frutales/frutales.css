@@ -6,22 +6,28 @@
       }
   
       svg {
-        background: #f0f0f0;
+     
         display: block;
-        width:100vw;
+        
   
+    }
+
+    svg#svgCanvas{
+     background-image:url(bg.jpg);
+     background-size: contain;
+     background-repeat: no-repeat;
     }
   
       #editor {
         position: absolute;
-        top: 10px;
-        left: 10px;
+        top: 0px;
+        right:0px;
         color: white;
         background: rgba(0, 0, 0, 0.7);
         border: 1px solid #ccc;
         padding: 10px;
         display: none;
-        width: 760px;
+        width: 300px;
         font-size: 10px;
   
       }
@@ -85,19 +91,9 @@
   
       }
   
-      .flex {
-        display: flex;
-        align-items: center;
-      }
-      
-      .flex>div {
-        flex: 1;
-        padding: 12px;
-      }
     
 
 
-      @media  (max-width: 767px) {
         .flex {
             display: block;
           }
@@ -105,12 +101,15 @@
            left:0;right:0;
             padding: 12px;
           }
+
+      @media  (max-width: 767px) {
           #editor {
            
             top:0;
             left:0;
            right:0;
-           width:auto;
+           width:95vw;
+
 
 
         }
@@ -215,13 +214,18 @@ button{
     cursor: pointer;
 }
 
-
+.hidded{
+  display: none !important;
+}
 .LOADING{
 position: fixed;
 top:0;left:0;
-width:100vw;
+right:0;
 height: 100vh;
 background-color: #000000ee;
-color:#aaffaa;
+ 
 z-index: 1000000;
+display:none;
+padding: 40px;
+color:#2244cc;
 }
