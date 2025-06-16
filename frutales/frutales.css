@@ -16,6 +16,7 @@
      background-image:url(bg.jpg);
      background-size: contain;
      background-repeat: no-repeat;
+     
     }
   
       #editor {
@@ -95,7 +96,7 @@
 
 
         .flex {
-            display: block;
+            display: flex;
           }
           .flex>div {
            left:0;right:0;
@@ -112,6 +113,14 @@
 
 
 
+        }
+
+        .flex {
+          display: block;
+        }
+        .flex>div {
+         left:0;right:0;
+          padding: 12px;
         }
     
         }

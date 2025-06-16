@@ -46,8 +46,8 @@ userInput.value=USER;
     messagesContainer.style.flex = '1';
     messagesContainer.style.padding = '10px';
     messagesContainer.style.overflowY = 'auto';
-    messagesContainer.style.backgroundColor = '#111111bb';
-
+    messagesContainer.style.backgroundColor = '#333333';
+    messagesContainer.style.border = '1px solid #000000';
     // Input container styling
     inputContainer.style.display = 'flex';
     inputContainer.style.padding = '10px';

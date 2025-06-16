@@ -2,14 +2,40 @@
     "name": "invernadero",
     "plants": [
         {
-            "id": "id",
-            "name": "limonero",
-            "x": 1020,
-            "y": 357,
+            "id": "LA COSA VACIA",
+            "name": "COSA",
+            "x": 443,
+            "y": 81,
             "color": "#cbbb10",
             "data": "",
             "fotos": [],
             "msgs": []
+        },
+        {
+            "id": "OBJETO x",
+            "name": "OBJETO",
+            "x": 774,
+            "y": 70,
+            "color": "#ffffff",
+            "data": "",
+            "fotos": [],
+            "msgs": []
+        },
+        {
+            "id": "a x",
+            "name": "a",
+            "x": 899,
+            "y": 1312,
+            "color": "#0f0f10",
+            "data": "",
+            "fotos": [],
+            "msgs": [
+                {
+                    "user": "gus",
+                    "msg": "a",
+                    "date": "15/06/2025, 19:22"
+                }
+            ]
         }
     ]
 }
