@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body{
+    font-size: 12px;
+    margin: 0;
+    background-color: #222222;
+    
+}
+        .lista   div.plant {
+position: relative;
+display: inline-block;
+margin:  16px 0px 0px 16px;
+ width: 150px;
+border:1px solid #eeeeee;
+padding: 16px;
+ height: 140px;
+background-color: #eeeeee;
+vertical-align: top;
+        }
+
+        .lista #editor{
+            position:sticky;
+            top:0px;
+            margin:0px 0 0 0;
+            padding:16px;
+            color:#88aaff;
+            background:#222222;
+            z-index:99999;
+            display:block;
+
+
+        }
+        .dot{
+            display: inline-block;
+            width:28px;height:28px;border-radius: 50%;
+            border:1px solid #aaaaaa;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class='lista'></div>
+    <script type='module'>
+        let Plants=[];
+        let MAP={};
+  let listDiv;
+        loadPlants();
+
+
+
+async function loadPlants() {
+listDiv=document.querySelector('.lista');
+  let afile =   `plants.json`;//invernadero.json` ;
+  const res = await fetch(afile + '?r=' + Math.random());
+  MAP = await res.json();
+
+  Plants = MAP.plants; 
+  renderPlants();
+  addEvents();
+}
+
+function renderPlants(){
+
+listDiv.innerHTML=`
+ 
+    <div id="editor">
+    <!--<button alt='cerrar' class='closeBut'>&times</button> --><small></small>
+
+<h3 class='toggle-info'>+ Info</h3>
+    <div class='flex hidded' style='display:none;'>
+      <div>
+
+        <label>especie:</label> 
+         <input type="text" id="editName"> .
+
+        <label>id: </label> 
+        <input type="text" id="editId"> .
+ 
+        <input type="color" id="editColor"> .
+        <input type="range" id="editRadio" min="5" max="80" value="20"> .
+        <span class='dot' id='editCircle'></span> .
+ 
+
+        <label>info:</label>  
+        <textarea id="editData"></textarea> .
+        
+        <div class="galeria"></div>
+        
+        <button id="saveChanges">Save</button>
+      </div>
+
+   <div><h3>Seguimiento</h3>
+        <div class='msgs'></div>
+        <div><input type='text' id='username' value='' placeholder="nombre usuario"> </div>
+      </div>
+
+    </div>
+  </div>
+    
+${Plants.map((p,index)=>{
+
+return `
+<div class='plant'>
+    <span class='dot' style='background:${p.color||"#aaaaaa"};width:${p.size||16}px;height:${p.size||16}px;'></span> 
+    <br>
+    ${p.name} id:${p.id}<!-- - ${p.x}-${p.y} --> ${p.fotos&&p.fotos.length>0?`
+        <div>
+        <img src='${p.fotos[0]}' style='height:90px;'>
+        </div>
+        `:''}
+    </div>
+
+`
+}).join('')}
+
+`;
+
+}
+
+function addEvents(){
+    [...listDiv.querySelectorAll('div')].forEach(c=>{
+
+c.querySelector('span').addEventListener('click',clk);
+
+    });
+
+function clk(e){
+    console.log(this);
+}
+
+}
+
+    </script>
+</body>
+</html>

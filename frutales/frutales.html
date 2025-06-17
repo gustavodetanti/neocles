@@ -11,9 +11,18 @@
   <meta name="keywords"
     content="csa">
   <meta name="author" content="">
-<link rel="stylesheet" href='frutales.css?r=R7'>
+<link rel="stylesheet" href='frutales.css?r=R13'>
 
- 
+ <style>
+
+.dot{
+            display: inline-block;
+            width:28px;height:28px;
+            border-radius: 50%;
+            border:1px solid #aaaaaa;
+            vertical-align: middle;
+        }
+ </style>
 </head>
 
 <body>
@@ -26,17 +35,28 @@
 
   <div id="editor">
     <button alt='cerrar' class='closeBut'>&times</button>
-    <img src='img/sign.jpeg' width='40px' class='drag-handle'> <small></small>
+    <img src='img/sign.jpeg' width='40px' class='drag-handle'><br> <small></small>
 
 <h3 class='toggle-info'>+ Info</h3>
     <div class='flex hidded'>
       <div>
-        <label>Especie: <input type="text" id="editName"></label>
-        <label>Id: <input type="text" id="editId"></label>
 
-        <input type="color" id="editColor">
-        <label>Info: <textarea id="editData"></textarea></label>
+        <label>especie:</label><br>
+         <input type="text" id="editName"><br>
+
+        <label>id: </label><br>
+        <input type="text" id="editId"><br>
+ 
+        <input type="color" id="editColor"><br>
+        <input type="range" id="editRadio" min="5" max="80" value="20"><br>
+        <span class='dot' id='editCircle'></span>
+<br>
+
+        <label>info:</label> <br>
+        <textarea id="editData"></textarea><br>
+        
         <div class="galeria"></div>
+        
         <button id="saveChanges">Save</button>
       </div>
 
@@ -56,6 +76,11 @@
 
 <div class="LOADING"><h3>loading...</h3></div>
 
+
+  
+
+
+
     <footer>
       <label>editable <input type='checkbox' id="modeBtn"></input></label> . 
       <button id='downloadImageBut'>download</button>
@@ -68,7 +93,7 @@
 
 
 
-    <script type='module' src='js/frutales.main.js?r=R7'>
+    <script type='module' src='js/frutales.main.js?r=R13'>
 
     </script>
 

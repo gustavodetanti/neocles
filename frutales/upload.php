@@ -1,11 +1,17 @@
 <?php
 header('Content-Type: application/json');
-
+// 
 $prefix='plant';
 if(isset($_REQUEST['prefix'])){
     $prefix=$_REQUEST['prefix'];
 
 }
+$dir="fotos/";
+if(isset($_REQUEST['folder'])){
+    $dir=$_REQUEST['folder'];
+
+}
+
 
 
 if(isset($_REQUEST['filetodel'])){
@@ -37,7 +43,7 @@ try {
         throw new Exception('No file uploaded');
     }
 
-    $targetDir = "fotos/";
+    $targetDir = $dir;
     if (!is_dir($targetDir) && !mkdir($targetDir, 0755, true)) {
         throw new Exception('Failed to create upload directory');
     }

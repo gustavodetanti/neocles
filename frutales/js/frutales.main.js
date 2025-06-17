@@ -1,36 +1,39 @@
-//import { buildings } from "./buildings.js";
-import { downloadSVG } from "./downloadSVG.js";
+
+import { createGrid } from "./createGrid.js"; 
 import { downloadSVGasJPG } from "./downloadSVGasJPG.js";
 
 import { EditorDragging } from "./EditorDragging.js";
 import { iconImage } from "./iconImage.js";
 import { ImagesComp } from "./ImagesComp.js";
 import { Messages } from "./Messages.js";
-import { Rats } from "./Rats.js";
+ 
 
 let EDITMODE = false;
+let FULLSIZE = true;
+let MapSize = { w: 1518, h: 1420 };
 
-let MapSize={w:1518,h:1420};
-
-let MAP={};
-
-let hash=window.location.hash?window.location.hash.split('#').join(''):null;
-console.log({hash});
+let MAP = {};
+let Plants = [];
 
 
+let hash = window.location.hash ? window.location.hash.split('#').join('') : null;
+console.log({ hash });
 
 
-document.addEventListener("DOMContentLoaded", ()=>{
-if(hash)  {
-let himg=new Image();
-himg.onload=function(){
-himg.onload=null;
-APP(himg);
-}
-himg.src="bgs/"+hash+".jpg"
 
-} else   APP();
 
+document.addEventListener("DOMContentLoaded", () => {
+  if (hash) {
+    let himg = new Image();
+    himg.onload = function () {
+      himg.onload = null;
+      APP(himg);
+    };
+    himg.src = "bgs/" + hash + ".jpg"
+
+  } else {
+     APP();
+  }
 
 });
 
@@ -41,23 +44,32 @@ himg.src="bgs/"+hash+".jpg"
 
 
 function APP(bgImage) {
-  let file="plants.json";
+  let file = "plants.json";
 
   const svg = document.getElementById('svgCanvas');
-  
-if(bgImage){
-MapSize.w= bgImage.naturalWidth;
-MapSize.h=  bgImage.naturalHeight;
-console.log({src:bgImage.src,MapSize});
-svg.style.backgroundImage=`url('bgs/${hash}.jpg')`;
-  
-}
+
+  if (bgImage) {
+    MapSize.w = bgImage.naturalWidth;
+    MapSize.h = bgImage.naturalHeight;
+    console.log({ src: bgImage.src, MapSize });
+    svg.style.backgroundImage = `url('bgs/${hash}.jpg')`;
+  }
+
+  let scale = window.innerWidth / MapSize.w;
+
+  if (FULLSIZE) {
+    svg.setAttribute('width', MapSize.w);
+    svg.setAttribute('height', MapSize.h);
+    scale = 1;
+  }
+
+
 
 
   const editor = document.getElementById('editor');
   const editorFlex = editor.querySelector('.flex');
   const editorFlexBut = editor.querySelector('.toggle-info');
-  
+
   const closeBut = editor.querySelector('.closeBut');
 
   const editName = document.getElementById('editName');
@@ -65,40 +77,38 @@ svg.style.backgroundImage=`url('bgs/${hash}.jpg')`;
   const editId = document.getElementById('editId');
 
   const editData = document.getElementById('editData');
+  const editRadio= document.getElementById('editRadio');
+  const editCircle= document.getElementById('editCircle');
+
+  
+
   const saveBtn = document.getElementById('saveChanges');
   const modeBtn = document.getElementById('modeBtn');
   const downloadImageBut = document.getElementById('downloadImageBut');
-  let plantGallery = editor.querySelector('.galeria');
-  let msgs = editor.querySelector('.msgs');
+  const plantGallery = editor.querySelector('.galeria');
+  const msgs = editor.querySelector('.msgs');
 
 
-  let scale=window.innerWidth/MapSize.w;
-
-
-
-
-  let Plants = [];
   let selectedPlant = null;
 
-svg.setAttribute("viewBox",`0 0 ${MapSize.w} ${MapSize.h}`);
+  svg.setAttribute("viewBox", `0 0 ${MapSize.w} ${MapSize.h}`);
 
 
-window.addEventListener('resize',()=>{
-  scale=window.innerWidth/MapSize.w;
-});
+  window.addEventListener('resize', () => {
+    scale = window.innerWidth / MapSize.w;
+  });
 
 
-loadPlants();
+  loadPlants();
 
 
 
   async function loadPlants() {
-     let afile=hash?`json/${hash}.json`:file;
-    const res = await fetch(afile+'?r=' + Math.random());
+    let afile = hash ? `json/${hash}.json` : file;
+    const res = await fetch(afile + '?r=' + Math.random());
     MAP = await res.json();
 
-Plants=MAP.plants;
-   // Plants=Plants.map(p=>{p.y+=250;return p;})
+    Plants = MAP.plants;//.map((p,i)=>{p.id=`${p.name} ${i+1}`;return p});
     renderPlants();
   }
 
@@ -108,8 +118,15 @@ Plants=MAP.plants;
 
     let especies = {};
     Plants.forEach((plant, index) => {
-      if (especies[plant.name]) especies[plant.name]++;
-      else especies[plant.name] = 1;
+      if (especies[plant.name]) {
+        // plant.id = `${plant.name} ${especies[plant.name] + 1}`; 
+         especies[plant.name]++;
+         }
+      else {
+       // plant.id = `${plant.name} 1`;
+        especies[plant.name] = 1;
+
+      }
     });
     console.log(JSON.stringify(especies, false, 4));
 
@@ -125,10 +142,9 @@ Plants=MAP.plants;
     createGrid(svg, 16, 15, 200);
 
 
-    //objetosApp(svg);
 
     Plants.forEach((plant, index) => {
-      Plant(plant, index);
+      Plant(plant, index,);
     }
     );
   }
@@ -150,10 +166,6 @@ Plants=MAP.plants;
     text.setAttribute('y', 20);
     text.setAttribute('text-anchor', 'middle');
     text.textContent = plant.name;
-
-
-
-
     let PL = plant.img;
     if (PL) { } else {
       if (plant.fotos && plant.fotos.length) {
@@ -167,10 +179,10 @@ Plants=MAP.plants;
 
       iconImage(g, PL, -20, -40);
 
-    }  
-     
+    }
 
-  
+
+
 
     g.appendChild(text);
     svg.appendChild(g);
@@ -189,34 +201,37 @@ Plants=MAP.plants;
       selectPlant(index);
     }
 
+
+
+
+    function enableDrag(g) {
+      let offsetX, offsetY, index;
+
+      g.addEventListener('mousedown', (e) => {
+        index = g.getAttribute('data-index');
+        const plant = Plants[index];
+        offsetX = e.offsetX - plant.x;
+        offsetY = e.offsetY - plant.y;
+
+        function onMouseMove(e) {
+          plant.x = e.offsetX - offsetX;
+          plant.y = e.offsetY - offsetY;
+          g.setAttribute('transform', `translate(${plant.x},${plant.y})`);
+        }
+
+        function onMouseUp() {
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+          savePlants();
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+      });
+    }
   }
 
 
-  function enableDrag(g) {
-    let offsetX, offsetY, index;
-
-    g.addEventListener('mousedown', (e) => {
-      index = g.getAttribute('data-index');
-      const plant = Plants[index];
-      offsetX = e.offsetX - plant.x;
-      offsetY = e.offsetY - plant.y;
-
-      function onMouseMove(e) {
-        plant.x = e.offsetX - offsetX;
-        plant.y = e.offsetY - offsetY;
-        g.setAttribute('transform', `translate(${plant.x},${plant.y})`);
-      }
-
-      function onMouseUp() {
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
-        savePlants();
-      }
-
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
-    });
-  }
 
   function _enableDrag(g) {
     let offsetX, offsetY, index;
@@ -300,36 +315,43 @@ Plants=MAP.plants;
   function selectPlant(index) {
 
     selectedPlant = Plants[index];
-    editor.querySelector('small').innerHTML=`${selectedPlant.name} - ${selectedPlant.id} `;
-    
-    if(window.innerWidth>767){
-editor.style.left=`${scale*selectedPlant.x}px`;
-editor.style.top=`${scale*selectedPlant.y}px`;
-    } else {
-      editor.style.left=`${0}px`;
-      editor.style.top=`${0}px`;
-      
-    }
+    editor.querySelector('small').innerHTML = `${selectedPlant.name} - ${selectedPlant.id} `;
+
+    editor.style.left = `${scale * selectedPlant.x}px`;
+    editor.style.top = `${scale * selectedPlant.y}px`;
+
     editorFlex.classList.add('hidded');
-    editorFlexBut.innerHTML='+ info';
+    editorFlexBut.innerHTML = '+ info';
+   editRadio.value= selectedPlant.size||20;
+
+   editCircle.style.width=editRadio.value*2+"px";
+   editCircle.style.height=editRadio.value*2+"px";
+   
+   editCircle.style.background=selectedPlant.color;
+   
 
     editName.value = selectedPlant.name;
     editId.value = selectedPlant.id;
     editColor.value = selectedPlant.color;
     editData.value = selectedPlant.data;
     plantGallery.innerHTML = ``;
+
+
+    // ICONO
     if (selectedPlant.img) {
       //   plantGallery.innerHTML=`<img style='width:100%;' src='${selectedPlant.img}'>`;
-      editor.querySelector('.drag-handle').src=selectedPlant.img;
+      editor.querySelector('.drag-handle').src = selectedPlant.img;
     }
-    if(selectedPlant.fotos && selectedPlant.fotos.length>0){
-      editor.querySelector('.drag-handle').src=selectedPlant.fotos[0];
-      
+    if (selectedPlant.fotos && selectedPlant.fotos.length > 0) {
+      editor.querySelector('.drag-handle').src = selectedPlant.fotos[0];
+
     } else {
-      editor.querySelector('.drag-handle').src='img/sign.jpeg'
+      editor.querySelector('.drag-handle').src = 'img/sign.jpeg'
     }
 
-    let IC = ImagesComp(plantGallery, selectedPlant, savePlants);
+
+
+    ImagesComp(plantGallery, selectedPlant, savePlants);
 
 
 
@@ -356,15 +378,30 @@ editor.style.top=`${scale*selectedPlant.y}px`;
 
   });
 
+editRadio.addEventListener("input",()=>{
+  if(selectedPlant){} else return;
+ 
+   editCircle.style.width=editRadio.value*2+"px";
+   editCircle.style.height=editRadio.value*2+"px";
+   
+});
+ 
 
   editorFlexBut.addEventListener('click', () => {
-if(editorFlex.classList.contains('hidded')){
-  editorFlex.classList.remove('hidded');
-  editorFlexBut.innerHTML='- info';
-} else {
-  editorFlex.classList.add('hidded');
-  editorFlexBut.innerHTML='+ info';
-}
+    if (editorFlex.classList.contains('hidded')) {
+      editorFlex.classList.remove('hidded');
+      editorFlexBut.innerHTML = '- info';
+
+      editor.classList.add('opened');
+      editor.style.left = 0;
+      editor.style.top = 0;
+      editor.style.width = '95%';
+    } else {
+      editor.classList.remove('opened');
+      editor.style.width = '100px';
+      editorFlex.classList.add('hidded');
+      editorFlexBut.innerHTML = '+ info';
+    }
 
   });
 
@@ -375,24 +412,36 @@ if(editorFlex.classList.contains('hidded')){
       selectedPlant.name = editName.value;
       selectedPlant.color = editColor.value;
       selectedPlant.id = editId.value;
-
+ 
+      selectedPlant.size=editRadio.value;
       selectedPlant.data = editData.value;
       renderPlants();
       savePlants();
       editor.style.display = 'none';
+
+      editor.classList.remove('opened');
+      editor.style.width = '100px';
+      editorFlex.classList.add('hidded');
+      editorFlexBut.innerHTML = '+ info';
+
+
     }
   });
 
 
   closeBut.addEventListener('click', () => {
     editor.style.display = 'none';
+    editor.classList.remove('opened');
+    editor.style.width = '100px';
+    editorFlex.classList.add('hidded');
+    editorFlexBut.innerHTML = '+ info';
   });
 
   svg.addEventListener('dblclick', (e) => {
 
-    const name = prompt('Enter plant name:');
+    const name = "nombre";
     if (name) {
-      const color = prompt('Enter color (hex):', '#00ff00');
+      const color = '#22aa44';
       const newPlant = { id: `${name} x`, name, x: e.offsetX, y: e.offsetY, color, data: [] };
       Plants.push(newPlant);
       renderPlants();
@@ -411,108 +460,43 @@ if(editorFlex.classList.contains('hidded')){
     if (!EDITMODE) return;
 
 
-    let afile=hash?`json/${hash}.json`:file;
+    let afile = hash ? `json/${hash}.json` : file;
 
 
     console.log('saving...');
-    fetch('save_plants.php?filename='+afile, {
+    fetch('save_plants.php?filename=' + afile, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(MAP)
+      body: JSON.stringify(MAP, false, 4)
     }).then(d => {
       console.log('saved');
     });
   }
-
-
-
-
-
-
-
-
-
-  function createGrid(svg, cols, rows, size) {
-
-
-    // Add grid lines
-    for (let x = 0; x <= cols * size; x += size) {
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      line.setAttribute("d", `M${x},0 L${x},${rows * size}`);
-      line.setAttribute("stroke", "#11111155");
-      line.setAttribute("stroke-width", "1");
-      svg.appendChild(line);
-    }
-
-    for (let y = 0; y <= rows * size; y += size) {
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      line.setAttribute("d", `M0,${y} L${cols * size},${y}`);
-      line.setAttribute("stroke", "#11111155");
-      line.setAttribute("stroke-width", "1");
-      svg.appendChild(line);
-    }
-
-    // Add clickable squares
-    for (let x = 0; x < cols; x++) {
-      for (let y = 0; y < rows; y++) {
-        const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        rect.setAttribute("x", x * size);
-        rect.setAttribute("y", y * size);
-        rect.setAttribute("width", size);
-        rect.setAttribute("height", size);
-        rect.setAttribute("fill", "transparent");
-        rect.setAttribute("data-pos", `${x} ${y}`);
-        svg.appendChild(rect);
-      }
-    }
-    //div.appendChild(svg);
-  }
-
-
-
-  function drawAccidents(svg) {
-    let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    rect.setAttribute("x", 590);
-    rect.setAttribute("y", 600);
-    rect.setAttribute("width", 60);
-    rect.setAttribute("height", 150);
-    rect.setAttribute("fill", "#dddddd");
-
-    svg.appendChild(rect);
-
-    let rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    rect1.setAttribute("x", 0);
-    rect1.setAttribute("y", 180);
-    rect1.setAttribute("width", 1240);
-    rect1.setAttribute("height", 40);
-    rect1.setAttribute("fill", "#884400");
-    svg.appendChild(rect1);
-
-
-
-
-
-  }
-
 }
 
 
 
 
+function drawAccidents(svg) {
+  let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  rect.setAttribute("x", 590);
+  rect.setAttribute("y", 600);
+  rect.setAttribute("width", 60);
+  rect.setAttribute("height", 150);
+  rect.setAttribute("fill", "#dddddd");
 
-function objetosApp(svg) {
+  svg.appendChild(rect);
+
+  let rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  rect1.setAttribute("x", 0);
+  rect1.setAttribute("y", 180);
+  rect1.setAttribute("width", 1240);
+  rect1.setAttribute("height", 40);
+  rect1.setAttribute("fill", "#884400");
+  svg.appendChild(rect1);
 
 
-  let g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  svg.appendChild(g);
-  let bg = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-  bg.setAttribute("d", `M0,0 L 1240,0 1240,1000 0,1000 0,0`);
-  bg.setAttribute("fill", `#00aa0055`);
-  g.appendChild(bg);
-
-  console.log('objetos disabled');
-  //buildings(g);
 
 
 }
