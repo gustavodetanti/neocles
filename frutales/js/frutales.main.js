@@ -1,4 +1,5 @@
 
+import { buildings } from "./buildings.js";
 import { createGrid } from "./createGrid.js"; 
 import { downloadSVGasJPG } from "./downloadSVGasJPG.js";
 
@@ -62,8 +63,9 @@ function APP(bgImage) {
     svg.setAttribute('height', MapSize.h);
     scale = 1;
   }
-
-
+//let gg=document.createElementNS('http://www.w3.org/2000/svg',"g");
+//svg.appendChild(gg)
+//buildings(svg);
 
 
   const editor = document.getElementById('editor');

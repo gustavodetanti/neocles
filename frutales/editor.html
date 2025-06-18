@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        @import "frutales.css";
 body{
     font-size: 12px;
     margin: 0;
@@ -19,7 +20,7 @@ margin:  16px 0px 0px 16px;
  width: 150px;
 border:1px solid #eeeeee;
 padding: 16px;
- height: 140px;
+  
 background-color: #eeeeee;
 vertical-align: top;
         }
@@ -44,19 +45,21 @@ vertical-align: top;
         }
     </style>
 </head>
-<body>
+<body><button id='saveBut'>save</button>
     <div class='lista'></div>
     <script type='module'>
+        import {ImagesComp} from "./js/ImagesComp.js";
         let Plants=[];
         let MAP={};
   let listDiv;
+  let afile =   `plants.json`;
         loadPlants();
 
 
 
 async function loadPlants() {
 listDiv=document.querySelector('.lista');
-  let afile =   `plants.json`;//invernadero.json` ;
+//invernadero.json` ;
   const res = await fetch(afile + '?r=' + Math.random());
   MAP = await res.json();
 
@@ -104,16 +107,13 @@ listDiv.innerHTML=`
   </div>
     
 ${Plants.map((p,index)=>{
-
+let right=p.size?p.size+1:17;
 return `
 <div class='plant'>
-    <span class='dot' style='background:${p.color||"#aaaaaa"};width:${p.size||16}px;height:${p.size||16}px;'></span> 
+    <span class='dot' style='position:absolute;right:${-10}px;top:${-10}px;background:${p.color||"#aaaaaa"};width:${p.size||16}px;height:${p.size||16}px;'></span> 
     <br>
-    ${p.name} id:${p.id}<!-- - ${p.x}-${p.y} --> ${p.fotos&&p.fotos.length>0?`
-        <div>
-        <img src='${p.fotos[0]}' style='height:90px;'>
-        </div>
-        `:''}
+    ${p.name} id:${p.id}
+    <div class='images'></div>
     </div>
 
 `
@@ -124,9 +124,14 @@ return `
 }
 
 function addEvents(){
-    [...listDiv.querySelectorAll('div')].forEach(c=>{
+    document.getElementById('saveBut').addEventListener('click',e=>{
+        SaveJson();
+    });
+    [...listDiv.querySelectorAll('div.plant')].forEach((c,i)=>{
 
 c.querySelector('span').addEventListener('click',clk);
+ImagesComp(c.querySelector('.images'), Plants[i],SaveJson) 
+
 
     });
 
@@ -134,6 +139,28 @@ function clk(e){
     console.log(this);
 }
 
+
+}
+
+function SaveJson(){
+    console.log("saveJson todo");
+    console.log(JSON.stringify(Plants,false,4));
+    savePlants()
+}
+
+function savePlants() {
+
+ 
+ 
+
+console.log('saving...');
+fetch('save_plants.php?filename=' + afile, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(MAP, false, 4)
+}).then(d => {
+  console.log('saved');
+});
 }
 
     </script>
