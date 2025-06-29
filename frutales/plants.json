@@ -5,12 +5,15 @@
         {
             "id": "limonero 1",
             "name": "limonero",
-            "x": 1050,
-            "y": 287,
+            "x": 1062.0535736083984,
+            "y": 245.92857360839844,
             "color": "#cbbb10",
             "data": "",
-            "fotos": [],
-            "msgs": []
+            "fotos": [
+                "fotos/limonero_6859ba9edaa89.jpg"
+            ],
+            "msgs": [],
+            "size": "20"
         },
         {
             "id": "naranjo 1",
@@ -20,7 +23,7 @@
             "color": "#ffba42",
             "size": "22",
             "fotos": [
-                "fotos/naranjo.jpg"
+                "fotos/naranjo_6859b9e09221e.jpg"
             ],
             "data": "",
             "msgs": [
@@ -34,54 +37,67 @@
         {
             "id": "naranjo 2",
             "name": "naranjo",
-            "x": 988,
-            "y": 266,
+            "x": 985,
+            "y": 271,
             "color": "#cb6a10",
             "data": "naranjo 1",
-            "fotos": [],
+            "fotos": [
+                "fotos/naranjo_6859bc5803db4.jpg"
+            ],
             "msgs": [],
-            "size": "8"
+            "size": "20"
         },
         {
             "id": "membrillo 1",
             "name": "membrillo",
-            "x": 876,
-            "y": 222,
+            "x": 886.7477722167969,
+            "y": 252.35714721679688,
             "color": "#dece21",
             "data": "",
-            "fotos": [],
-            "msgs": []
+            "fotos": [
+                "fotos/membrillo_6859bf2b9a694.jpg"
+            ],
+            "msgs": [],
+            "size": "20"
         },
         {
             "id": "pomelo 1",
             "name": "pomelo",
-            "x": 761,
-            "y": 222,
+            "x": 804.1919555664062,
+            "y": 221.10714721679688,
             "color": "#00ff00",
             "data": "",
             "msgs": [],
-            "fotos": []
+            "fotos": [
+                "fotos/pomelo_6859bf5d087fa.jpg"
+            ],
+            "size": "20"
         },
         {
             "id": "naranjo 3",
             "name": "naranjo",
-            "x": 634,
-            "y": 186,
+            "x": 666.037956237793,
+            "y": 213.59820556640625,
             "color": "#cb6a10",
             "data": "",
-            "fotos": [],
+            "fotos": [
+                "fotos/naranjo_6859bfba9661a.jpg"
+            ],
             "msgs": [],
-            "size": "11"
+            "size": "20"
         },
         {
             "id": "manzano 1",
             "name": "manzano",
-            "x": 546,
-            "y": 142,
+            "x": 559.21875,
+            "y": 165.3125,
             "color": "#cb104e",
             "data": "",
-            "fotos": [],
-            "msgs": []
+            "fotos": [
+                "fotos/manzano_6859c6dea7e08.jpg"
+            ],
+            "msgs": [],
+            "size": "20"
         },
         {
             "id": "manzano 2",
@@ -96,12 +112,15 @@
         {
             "id": "cedron 1",
             "name": "cedron",
-            "x": 354,
-            "y": 168,
-            "color": "#00ff00",
+            "x": 313,
+            "y": 152,
+            "color": "#fffb00",
             "data": "",
-            "fotos": [],
-            "msgs": []
+            "fotos": [
+                "fotos/cedron_6859c7047eeab.jpg"
+            ],
+            "msgs": [],
+            "size": "20"
         },
         {
             "id": "kinoto 1",
@@ -111,7 +130,10 @@
             "color": "#f7a436",
             "data": "",
             "msgs": [],
-            "fotos": []
+            "fotos": [
+                "fotos/kinoto_6859c6889ef0f.jpg"
+            ],
+            "size": "20"
         },
         {
             "id": "kinoto 2",
@@ -146,8 +168,8 @@
         {
             "id": "limonero 2",
             "name": "limonero",
-            "x": 554,
-            "y": 501,
+            "x": 562,
+            "y": 487,
             "color": "#cbbb10",
             "data": "",
             "fotos": [],
@@ -166,18 +188,21 @@
         {
             "id": "guayaba 1",
             "name": "guayaba",
-            "x": 189,
-            "y": 236,
+            "x": 131,
+            "y": 284,
             "color": "#0d4d10",
             "data": "",
             "msgs": [],
-            "fotos": []
+            "fotos": [
+                "fotos/guayaba_6859c7aa2f098.jpg"
+            ],
+            "size": "20"
         },
         {
             "id": "kaqui 1",
             "name": "kaqui",
-            "x": 233,
-            "y": 358,
+            "x": 203,
+            "y": 371,
             "color": "#cb3c10",
             "data": "",
             "fotos": [],
@@ -196,8 +221,8 @@
         {
             "id": "citrico 1",
             "name": "citrico",
-            "x": 384,
-            "y": 463,
+            "x": 457,
+            "y": 490,
             "color": "#00ff00",
             "data": "qué citrico es?",
             "fotos": [],
@@ -206,18 +231,21 @@
         {
             "id": "mandarino 1",
             "name": "mandarino",
-            "x": 918,
-            "y": 502,
+            "x": 913.1726913452148,
+            "y": 465.04412841796875,
             "color": "#00ff00",
             "data": "",
-            "fotos": [],
-            "msgs": []
+            "fotos": [
+                "fotos/mandarino_6859c74a9f8dd.jpg"
+            ],
+            "msgs": [],
+            "size": "20"
         },
         {
             "id": "manzano 5",
             "name": "manzano",
-            "x": 418,
-            "y": 387,
+            "x": 407,
+            "y": 346,
             "color": "#cb104e",
             "data": "",
             "fotos": [],
@@ -306,8 +334,8 @@
         {
             "id": "parral 1",
             "name": "parral",
-            "x": 571,
-            "y": 818,
+            "x": 559,
+            "y": 797,
             "color": "#6110cb",
             "data": "",
             "fotos": [],
@@ -316,13 +344,12 @@
         {
             "id": "parral 2",
             "name": "parral",
-            "x": 480,
-            "y": 760,
+            "x": 479,
+            "y": 774,
             "color": "#6110cb",
             "data": "",
             "fotos": [],
-            "msgs": [],
-            "size": "12"
+            "msgs": []
         },
         {
             "id": "cerezo 1",
@@ -357,8 +384,8 @@
         {
             "id": "pecan 1",
             "name": "pecan",
-            "x": 259,
-            "y": 792,
+            "x": 139,
+            "y": 764,
             "color": "#00ff00",
             "data": "",
             "fotos": [],
@@ -377,8 +404,8 @@
         {
             "id": "duraznero 3",
             "name": "duraznero",
-            "x": 314,
-            "y": 687,
+            "x": 316,
+            "y": 676,
             "color": "#cb9010",
             "data": "",
             "fotos": [],
@@ -407,8 +434,8 @@
         {
             "id": "higuera 2",
             "name": "higuera",
-            "x": 345,
-            "y": 1224,
+            "x": 332,
+            "y": 1230,
             "color": "#00ff00",
             "data": "",
             "fotos": [],
@@ -427,8 +454,8 @@
         {
             "id": "higuera 4",
             "name": "higuera",
-            "x": 330,
-            "y": 1156,
+            "x": 269,
+            "y": 1157,
             "color": "#00ff00",
             "data": [
                 ""
@@ -439,8 +466,8 @@
         {
             "id": "higuera 5",
             "name": "higuera",
-            "x": 305,
-            "y": 1084,
+            "x": 298,
+            "y": 1078,
             "color": "#00ff00",
             "data": "",
             "fotos": [],
@@ -449,8 +476,8 @@
         {
             "id": "guayaba 3",
             "name": "guayaba",
-            "x": 283,
-            "y": 903,
+            "x": 191,
+            "y": 936,
             "color": "#0d4d10",
             "data": "",
             "fotos": [],
@@ -510,11 +537,13 @@
         {
             "id": "nombre 1",
             "name": "nombre",
-            "x": 161,
-            "y": 1283,
+            "x": 86,
+            "y": 1203,
             "color": "#22aa44",
             "data": "",
-            "fotos": [],
+            "fotos": [
+                "fotos/nombre_685dbc384db79.png"
+            ],
             "msgs": []
         }
     ]

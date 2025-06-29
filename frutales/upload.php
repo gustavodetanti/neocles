@@ -12,6 +12,12 @@ if(isset($_REQUEST['folder'])){
 
 }
 
+$ext=false;
+if(isset($_REQUEST['extension'])){
+    $ext=$_REQUEST['extension'];
+
+}
+
 
 
 if(isset($_REQUEST['filetodel'])){
@@ -34,7 +40,45 @@ if (unlink($ftd)) {
  
 
     exit();
+} 
+
+
+
+try {
+    if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+        throw new Exception('No file uploaded or upload error');
+    }
+
+  
+    $uploadDir = $dir;
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    $fileExt = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+    if($ext)$fileExt=$ext;
+    $fileName = $prefix . '_' . uniqid() . '.' . $fileExt;
+    $filePath = $uploadDir . $fileName;
+
+    if (!move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
+        throw new Exception('Failed to move uploaded file');
+    }
+
+    echo json_encode([
+        'success' => true,
+        'filePath' => $filePath
+    ]);
+} catch (Exception $e) {
+    echo json_encode([
+        'success' => false,
+        'error' => $e->getMessage()
+    ]);
 }
+
+
+
+
+exit();
 
 
 try {
