@@ -1,181 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        @import "frutales.css";
-body{
-    font-size: 12px;
-    margin: 0;
-    background-color: #222222;
-    
-}
-        .lista   div.plant {
-position: relative;
-display: inline-block;
-margin:  16px 0px 0px 16px;
- width: 150px;
-border:1px solid #eeeeee;
-padding: 16px;
-  
-background-color: #eeeeee;
-vertical-align: top;
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import "frutales.css";
 
-        .lista #editor{
-            position:sticky;
-            top:0px;
-            margin:0px 0 0 0;
-            padding:16px;
-            color:#88aaff;
-            background:#222222;
-            z-index:99999;
-            display:block;
+    body {
+      font-size: 12px;
+      margin: 0;
+      background-color: #222222;
+
+    }
+
+    .lista div.plant {
+      position: relative;
+      display: inline-block;
+      margin: 16px 0px 0px 16px;
+
+      border: 1px solid #eeeeee;
+      padding: 16px;
+
+      color: #111111;
+      background-color: #eeeeee;
+      vertical-align: top;
+    }
+
+    .lista div.plant .imageGal .image{
+width:120px !important;
+height:120px !important;
 
 
-        }
-        .dot{
-            display: inline-block;
-            width:28px;height:28px;border-radius: 50%;
-            border:1px solid #aaaaaa;
-            vertical-align: middle;
-        }
-    </style>
+    }
+
+
+    .lista #editor {
+      position: sticky;
+      top: 0px;
+      margin: 0px 0 0 0;
+      padding: 16px;
+      color: #88aaff;
+      background: #222222;
+      z-index: 99999;
+      display: block;
+
+
+    }
+
+    .dot {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid #aaaaaa;
+      vertical-align: middle;
+    }
+  </style>
 </head>
+
 <body>
-  <button id='saveBut'>save</button>
+  <button id='saveBut'>save</button> . <span class='log'></span>
 
-    <div class='lista'></div>
-
-
+  <div class='lista'></div>
 
 
 
 
 
-    <script type='module'>
-        import {ImagesComp} from "./src/ImagesComp.js";
-        let Plants=[];
-        let MAP={};
-  let listDiv;
-  let afile =   `plants.json`;
-        loadPlants();
+
+
+  <script type='module'>
+    import { ImagesComp } from "./src/ImagesComp.js";
+    let Plants = [];
+    let MAP = {};
+    let listDiv;
+    let afile = `plants_copy.json`;
+    loadPlants();
 
 
 
-async function loadPlants() {
-listDiv=document.querySelector('.lista');
-//invernadero.json` ;
-  const res = await fetch(afile + '?r=' + Math.random());
-  MAP = await res.json();
+    async function loadPlants() {
+      listDiv = document.querySelector('.lista');
+      //invernadero.json` ;
+      const res = await fetch(afile + '?r=' + Math.random());
+      MAP = await res.json();
 
-  Plants = MAP.plants; 
-  renderPlants();
-  addEvents();
-}
+      Plants = MAP.plants;
+      renderPlants();
+      addEvents();
+    }
 
-function renderPlants(){
+    function renderPlants() {
 
-listDiv.innerHTML=`
- 
-    <div id="editor">
-    <!--<button alt='cerrar' class='closeBut'>&times</button> --><small></small>
-
-<h3 class='toggle-info'>+ Info</h3>
-    <div class='flex hidded' style='display:none;'>
-      <div>
-
-        <label>especie:</label> 
-         <input type="text" id="editName"> .
-
-        <label>id: </label> 
-        <input type="text" id="editId"> .
- 
-        <input type="color" id="editColor"> .
-        <input type="range" id="editRadio" min="5" max="80" value="20"> .
-        <span class='dot' id='editCircle'></span> .
- 
-
-        <label>info:</label>  
-        <textarea id="editData"></textarea> .
-        
-        <div class="galeria"></div>
-        
-        <button id="saveChanges">Save</button>
-      </div>
-
-   <div><h3>Seguimiento</h3>
-        <div class='msgs'></div>
-        <div><input type='text' id='username' value='' placeholder="nombre usuario"> </div>
-      </div>
-
-    </div>
-  </div>
+      listDiv.innerHTML = `
+  
     
-${Plants.map((p,index)=>{
-let right=p.size?p.size+1:17;
-return `
+${Plants.map((p, index) => {
+        let right = p.size ? p.size + 1 : 17;
+        return `
 <div class='plant'>
-    <span class='dot' style='position:absolute;right:${-10}px;top:${-10}px;background:${p.color||"#aaaaaa"};width:${p.size||16}px;height:${p.size||16}px;'></span> 
+    <span class='dot' style='position:absolute;right:${-10}px;top:${-10}px;background:${p.color || "#aaaaaa"};width:${p.size || 16}px;height:${p.size || 16}px;'></span> 
     <br>
-    ${p.name} id:${p.id}
-    <div class='images'></div>
+    spc:${p.especie} nam:${p.name} id:${p.id} 
+    <div class='imageGal'></div>
     </div>
 
 `
-}).join('')}
+      }).join('')}
 
 `;
 
-}
+    }
 
-function addEvents(){
-    document.getElementById('saveBut').addEventListener('click',e=>{
+    function addEvents() {
+      document.getElementById('saveBut').addEventListener('click', e => {
         SaveJson();
-    });
-    [...listDiv.querySelectorAll('div.plant')].forEach((c,i)=>{
+      });
+      [...listDiv.querySelectorAll('div.plant')].forEach((c, i) => {
 
-c.querySelector('span').addEventListener('click',clk);
-ImagesComp(c.querySelector('.images'), Plants[i],SaveJson) 
-
-
-    });
-
-function clk(e){
-    console.log(this);
-}
+        c.querySelector('span').addEventListener('click', clk);
+        ImagesComp(c.querySelector('.imageGal'), Plants[i], SaveJson)
 
 
-}
+      });
 
-function SaveJson(){
-    console.log("saveJson todo");
-    console.log(JSON.stringify(Plants,false,4));
-    savePlants()
-}
+      function clk(e) {
+        console.log(this);
+      }
 
-function savePlants() {
 
- 
- 
+    }
 
-console.log('saving...');
-fetch('save_plants.php?filename=' + afile, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(MAP, false, 4)
-}).then(d => {
-  console.log('saved');
-});
-}
+    function SaveJson() { 
+      console.log(JSON.stringify(Plants, false, 4));
+      savePlants()
+    }
 
-    </script>
+    function savePlants() {
 
 
 
+
+      console.log('saving...');
+      document.querySelector('.log').innerHTML='saving...';
+      fetch('save_plants.php?filename=' + afile, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(MAP, false, 4)
+      }).then(d => {
+        console.log('saved');
+        document.querySelector('.log').innerHTML='saved';
+      });
+    }
+
+  </script>
 
 
 
@@ -184,6 +165,7 @@ fetch('save_plants.php?filename=' + afile, {
 
 
 
- 
+
 </body>
+
 </html>

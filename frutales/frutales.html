@@ -11,46 +11,42 @@
   <meta name="keywords"
     content="csa">
   <meta name="author" content="">
-<link rel="stylesheet" href='frutales.css?r=R18'>
+<link rel="stylesheet" href='frutales.css?r=782'>
 
  <style>
 
-.dot{
-            display: inline-block;
-            width:28px;height:28px;
-            border-radius: 50%;
-            border:1px solid #aaaaaa;
-            vertical-align: middle;
-        }
+
+
  </style>
 </head>
 
 <body>
-
-
+<header>
+  <h1>IRIS TERRA</h1>
+</header>
+<div class='nav'><a class='button showMapa'>mapa</a> . <a class='button showTimeline' href='timeline.html'>timeline</a> </div>
 
   <svg id="svgCanvas" ></svg>
-  <div id="svgRats" style='position: absolute;top:0;width:100vw;'></div>
-
+ 
 
   <div id="editor">
     <button alt='cerrar' class='closeBut'>&times</button>
-    <img src='img/sign.jpeg' width='40px' class='drag-handle'><br> <small></small>
+ <small></small>
     <div class="galeria"></div>
         
-<h3 class='toggle-info'>+ Info</h3>
-    <div class='flex hidded'>
+ 
+    <div class='flex'>
       <div>
+        <label>nombre:</label><br>
+         <input type="text" id="editName"><br>
 
         <label>especie:</label><br>
-         <input type="text" id="editName"><br>
+         <input type="text" id="editEspecie"><br>
 
         <label>id: </label><br>
         <input type="text" id="editId"><br>
  
-        <input type="color" id="editColor"><br>
-        <input type="range" id="editRadio" min="5" max="80" value="20"><br>
-        <span class='dot' id='editCircle'></span>
+        <input type="color" id="editColor"> 
 <br>
 
         <label>info:</label> <br>
@@ -78,13 +74,12 @@
 
 
   
-
+<div class="galeria-steal opened"></div>
 
 
     <footer>
       <label> set editable ››››  <input type='checkbox' id="modeBtn" selected></input></label> . 
-      <button id='downloadImageBut'>‹ download › </button>
-
+    
     </footer>
 
 
@@ -93,10 +88,10 @@
 
 
 
-    <script type='module' src='js/frutales.main.bundle.js?r=78'>
+    <script type='module' src='js/frutales.main.bundle.js?r=782'>
 
     </script>
-
+ 
 
 </body>
 

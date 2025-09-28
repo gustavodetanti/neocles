@@ -3,53 +3,71 @@
     "bg": "bg.jpg",
     "plants": [
         {
-            "id": "limonero 1",
-            "name": "limonero",
-            "x": 1062.0535736083984,
-            "y": 245.92857360839844,
+            "id": "0",
+            "name": "limonero 1",
+            "x": 1067.0535736083984,
+            "y": 258.92857360839844,
             "color": "#cbbb10",
             "data": "",
             "fotos": [
                 "fotos/limonero_6859ba9edaa89.jpg"
             ],
             "msgs": [],
-            "size": "20"
+            "size": "20",
+            "especie": "limonero",
+            "images": [
+                {
+                    "img": "fotos/limonero_6859ba9edaa89.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "limonero 1"
+                }
+            ]
         },
         {
-            "id": "naranjo 1",
-            "name": "naranjo",
-            "x": 1144,
-            "y": 257,
+            "id": "1",
+            "name": "naranjo n1",
+            "x": 1158,
+            "y": 260,
             "color": "#ffba42",
             "size": "22",
             "fotos": [
                 "fotos/naranjo_6859b9e09221e.jpg"
             ],
             "data": "",
-            "msgs": [
+            "msgs": [],
+            "especie": "naranjo",
+            "images": [
                 {
-                    "user": "gus",
-                    "msg": "la foto no es real",
-                    "date": "13/06/2025, 13:19"
+                    "img": "fotos/naranjo_6859b9e09221e.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "naranjo 1"
                 }
             ]
         },
         {
-            "id": "naranjo 2",
-            "name": "naranjo",
-            "x": 985,
-            "y": 271,
+            "id": 2,
+            "name": "naranjo 2",
+            "x": 973,
+            "y": 253,
             "color": "#cb6a10",
             "data": "naranjo 1",
             "fotos": [
                 "fotos/naranjo_6859bc5803db4.jpg"
             ],
             "msgs": [],
-            "size": "20"
+            "size": "20",
+            "especie": "naranjo",
+            "images": [
+                {
+                    "img": "fotos/naranjo_6859bc5803db4.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "naranjo 2"
+                }
+            ]
         },
         {
-            "id": "membrillo 1",
-            "name": "membrillo",
+            "id": 3,
+            "name": "membrillo 1",
             "x": 886.7477722167969,
             "y": 252.35714721679688,
             "color": "#dece21",
@@ -58,11 +76,19 @@
                 "fotos/membrillo_6859bf2b9a694.jpg"
             ],
             "msgs": [],
-            "size": "20"
+            "size": "20",
+            "especie": "membrillo",
+            "images": [
+                {
+                    "img": "fotos/membrillo_6859bf2b9a694.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "membrillo 1"
+                }
+            ]
         },
         {
-            "id": "pomelo 1",
-            "name": "pomelo",
+            "id": 4,
+            "name": "pomelo 1",
             "x": 804.1919555664062,
             "y": 221.10714721679688,
             "color": "#00ff00",
@@ -71,11 +97,19 @@
             "fotos": [
                 "fotos/pomelo_6859bf5d087fa.jpg"
             ],
-            "size": "20"
+            "size": "20",
+            "especie": "pomelo",
+            "images": [
+                {
+                    "img": "fotos/pomelo_6859bf5d087fa.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "pomelo 1"
+                }
+            ]
         },
         {
-            "id": "naranjo 3",
-            "name": "naranjo",
+            "id": 5,
+            "name": "naranjo 3",
             "x": 666.037956237793,
             "y": 213.59820556640625,
             "color": "#cb6a10",
@@ -84,11 +118,19 @@
                 "fotos/naranjo_6859bfba9661a.jpg"
             ],
             "msgs": [],
-            "size": "20"
+            "size": "20",
+            "especie": "naranjo",
+            "images": [
+                {
+                    "img": "fotos/naranjo_6859bfba9661a.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "naranjo 3"
+                }
+            ]
         },
         {
-            "id": "manzano 1",
-            "name": "manzano",
+            "id": 6,
+            "name": "manzano 1",
             "x": 559.21875,
             "y": 165.3125,
             "color": "#cb104e",
@@ -97,21 +139,31 @@
                 "fotos/manzano_6859c6dea7e08.jpg"
             ],
             "msgs": [],
-            "size": "20"
+            "size": "20",
+            "especie": "manzano",
+            "images": [
+                {
+                    "img": "fotos/manzano_6859c6dea7e08.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "manzano 1"
+                }
+            ]
         },
         {
-            "id": "manzano 2",
-            "name": "manzano",
+            "id": 7,
+            "name": "manzano 2",
             "x": 451,
             "y": 141,
             "color": "#cb104e",
             "data": "",
             "msgs": [],
-            "fotos": []
+            "fotos": [],
+            "images": [],
+            "especie": "manzano"
         },
         {
-            "id": "cedron 1",
-            "name": "cedron",
+            "id": 8,
+            "name": "cedron 1",
             "x": 313,
             "y": 152,
             "color": "#fffb00",
@@ -120,11 +172,19 @@
                 "fotos/cedron_6859c7047eeab.jpg"
             ],
             "msgs": [],
-            "size": "20"
+            "size": "20",
+            "especie": "cedron",
+            "images": [
+                {
+                    "img": "fotos/cedron_6859c7047eeab.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "cedron 1"
+                }
+            ]
         },
         {
-            "id": "kinoto 1",
-            "name": "kinoto",
+            "id": 9,
+            "name": "kinoto 1",
             "x": 1027,
             "y": 401,
             "color": "#f7a436",
@@ -133,61 +193,79 @@
             "fotos": [
                 "fotos/kinoto_6859c6889ef0f.jpg"
             ],
-            "size": "20"
+            "size": "20",
+            "especie": "kinoto",
+            "images": [
+                {
+                    "img": "fotos/kinoto_6859c6889ef0f.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "kinoto 1"
+                }
+            ]
         },
         {
-            "id": "kinoto 2",
-            "name": "kinoto",
-            "x": 972,
+            "id": "10",
+            "name": "kinoto 2",
+            "x": 956,
             "y": 393,
             "color": "#f7a436",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "kinoto"
         },
         {
-            "id": "manzano 3",
-            "name": "manzano",
-            "x": 758,
-            "y": 395,
+            "id": 11,
+            "name": "manzano 3",
+            "x": 757,
+            "y": 385,
             "color": "#cb104e",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "manzano"
         },
         {
-            "id": "ciruelo 1",
-            "name": "ciruelo",
+            "id": 12,
+            "name": "ciruelo 1",
             "x": 512,
             "y": 358,
             "color": "#00ff00",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "ciruelo"
         },
         {
-            "id": "limonero 2",
-            "name": "limonero",
-            "x": 562,
-            "y": 487,
+            "id": 13,
+            "name": "limonero 2",
+            "x": 577,
+            "y": 425,
             "color": "#cbbb10",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "limonero"
         },
         {
-            "id": "duraznero 1",
-            "name": "duraznero",
+            "id": 14,
+            "name": "duraznero 1",
             "x": 220,
             "y": 471,
             "color": "#cb9010",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "duraznero"
         },
         {
-            "id": "guayaba 1",
-            "name": "guayaba",
+            "id": 15,
+            "name": "guayaba 1",
             "x": 131,
             "y": 284,
             "color": "#0d4d10",
@@ -196,41 +274,55 @@
             "fotos": [
                 "fotos/guayaba_6859c7aa2f098.jpg"
             ],
-            "size": "20"
+            "size": "20",
+            "especie": "guayaba",
+            "images": [
+                {
+                    "img": "fotos/guayaba_6859c7aa2f098.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "guayaba 1"
+                }
+            ]
         },
         {
-            "id": "kaqui 1",
-            "name": "kaqui",
+            "id": 16,
+            "name": "kaqui 1",
             "x": 203,
             "y": 371,
             "color": "#cb3c10",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "kaqui"
         },
         {
-            "id": "manzano 4",
-            "name": "manzano",
-            "x": 248,
-            "y": 289,
+            "id": 17,
+            "name": "manzano 4",
+            "x": 257,
+            "y": 276,
             "color": "#cb104e",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "manzano"
         },
         {
-            "id": "citrico 1",
-            "name": "citrico",
+            "id": 18,
+            "name": "citrico 1",
             "x": 457,
             "y": 490,
             "color": "#00ff00",
             "data": "qué citrico es?",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "citrico"
         },
         {
-            "id": "mandarino 1",
-            "name": "mandarino",
+            "id": 19,
+            "name": "mandarino 1",
             "x": 913.1726913452148,
             "y": 465.04412841796875,
             "color": "#00ff00",
@@ -239,221 +331,271 @@
                 "fotos/mandarino_6859c74a9f8dd.jpg"
             ],
             "msgs": [],
-            "size": "20"
+            "size": "20",
+            "especie": "mandarino",
+            "images": [
+                {
+                    "img": "fotos/mandarino_6859c74a9f8dd.jpg",
+                    "date": "Sat Jul 05 2025",
+                    "plant": "mandarino 1"
+                }
+            ]
         },
         {
-            "id": "manzano 5",
-            "name": "manzano",
-            "x": 407,
-            "y": 346,
+            "id": 20,
+            "name": "manzano 5",
+            "x": 394,
+            "y": 347,
             "color": "#cb104e",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "manzano"
         },
         {
-            "id": "manzano 6",
-            "name": "manzano",
+            "id": 21,
+            "name": "manzano 6",
             "x": 788,
             "y": 488,
             "color": "#cb104e",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "manzano"
         },
         {
-            "id": "manzano 7",
-            "name": "manzano",
+            "id": 22,
+            "name": "manzano 7",
             "x": 726,
             "y": 570,
             "color": "#cb104e",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "manzano"
         },
         {
-            "id": "manzano 8",
-            "name": "manzano",
+            "id": 23,
+            "name": "manzano 8",
             "x": 709,
             "y": 639,
             "color": "#cb104e",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "manzano"
         },
         {
-            "id": "limonero 3",
-            "name": "limonero",
-            "x": 863,
-            "y": 573,
+            "id": 24,
+            "name": "limonero 3",
+            "x": 887,
+            "y": 577,
             "color": "#cbbb10",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "limonero"
         },
         {
-            "id": "limonero 4",
-            "name": "limonero",
+            "id": 25,
+            "name": "limonero 4",
             "x": 862,
             "y": 662,
             "color": "#cbbb10",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "limonero"
         },
         {
-            "id": "manzano 9",
-            "name": "manzano",
+            "id": 26,
+            "name": "manzano 9",
             "x": 806,
             "y": 733,
             "color": "#cb104e",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "manzano"
         },
         {
-            "id": "membrillo 2",
-            "name": "membrillo",
+            "id": 27,
+            "name": "membrillo 2",
             "x": 686,
             "y": 859,
             "color": "#dece21",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "membrillo"
         },
         {
-            "id": "membrillo 3",
-            "name": "membrillo",
+            "id": 28,
+            "name": "membrillo 3",
             "x": 761,
             "y": 801,
             "color": "#dece21",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "membrillo"
         },
         {
-            "id": "parral 1",
-            "name": "parral",
+            "id": 29,
+            "name": "parral 1",
             "x": 559,
             "y": 797,
             "color": "#6110cb",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "parral"
         },
         {
-            "id": "parral 2",
-            "name": "parral",
+            "id": 30,
+            "name": "parral 2",
             "x": 479,
             "y": 774,
             "color": "#6110cb",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "parral"
         },
         {
-            "id": "cerezo 1",
-            "name": "cerezo",
+            "id": 31,
+            "name": "cerezo 1",
             "x": 400,
             "y": 738,
             "color": "#a910cb",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "cerezo"
         },
         {
-            "id": "cerezo 2",
-            "name": "cerezo",
+            "id": 32,
+            "name": "cerezo 2",
             "x": 465,
             "y": 673,
             "color": "#a910cb",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "cerezo"
         },
         {
-            "id": "duraznero 2",
-            "name": "duraznero",
+            "id": 33,
+            "name": "duraznero 2",
             "x": 344,
             "y": 610,
             "color": "#cb9010",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "duraznero"
         },
         {
-            "id": "pecan 1",
-            "name": "pecan",
+            "id": 34,
+            "name": "pecan 1",
             "x": 139,
             "y": 764,
             "color": "#00ff00",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "pecan"
         },
         {
-            "id": "guayaba 2",
-            "name": "guayaba",
+            "id": 35,
+            "name": "guayaba 2",
             "x": 221,
             "y": 633,
             "color": "#0d4d10",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "guayaba"
         },
         {
-            "id": "duraznero 3",
-            "name": "duraznero",
+            "id": 36,
+            "name": "duraznero 3",
             "x": 316,
             "y": 676,
             "color": "#cb9010",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "duraznero"
         },
         {
-            "id": "manzano 10",
-            "name": "manzano",
+            "id": 37,
+            "name": "manzano 10",
             "x": 285,
             "y": 537,
             "color": "#cb104e",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "manzano"
         },
         {
-            "id": "higuera 1",
-            "name": "higuera",
+            "id": 38,
+            "name": "higuera 1",
             "x": 285,
             "y": 1009,
             "color": "#00ff00",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "higuera"
         },
         {
-            "id": "higuera 2",
-            "name": "higuera",
+            "id": 39,
+            "name": "higuera 2",
             "x": 332,
             "y": 1230,
             "color": "#00ff00",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "higuera"
         },
         {
-            "id": "higuera 3",
-            "name": "higuera",
+            "id": 40,
+            "name": "higuera 3",
             "x": 352,
             "y": 1294,
             "color": "#00ff00",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "higuera"
         },
         {
-            "id": "higuera 4",
-            "name": "higuera",
+            "id": 41,
+            "name": "higuera 4",
             "x": 269,
             "y": 1157,
             "color": "#00ff00",
@@ -461,89 +603,117 @@
                 ""
             ],
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "higuera"
         },
         {
-            "id": "higuera 5",
-            "name": "higuera",
+            "id": 42,
+            "name": "higuera 5",
             "x": 298,
             "y": 1078,
             "color": "#00ff00",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "higuera"
         },
         {
-            "id": "guayaba 3",
-            "name": "guayaba",
+            "id": 43,
+            "name": "guayaba 3",
             "x": 191,
             "y": 936,
             "color": "#0d4d10",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "guayaba"
         },
         {
-            "id": "naranjo 4",
-            "name": "naranjo",
+            "id": 44,
+            "name": "naranjo 4",
             "x": 344,
             "y": 1374,
             "color": "#cb6a10",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "naranjo"
         },
         {
-            "id": "limonero 5",
-            "name": "limonero",
+            "id": 45,
+            "name": "limonero 5",
             "x": 481,
             "y": 1271,
             "color": "#cbbb10",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "limonero"
         },
         {
-            "id": "kinoto 3",
-            "name": "kinoto",
+            "id": 46,
+            "name": "kinoto 3",
             "x": 429,
             "y": 1236,
             "color": "#f7a436",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "kinoto"
         },
         {
-            "id": "higuera 6",
-            "name": "higuera",
+            "id": 47,
+            "name": "higuera 6",
             "x": 535,
             "y": 1216,
             "color": "#00ff00",
             "data": "",
             "fotos": [],
-            "msgs": []
+            "images": [],
+            "msgs": [],
+            "especie": "higuera"
         },
         {
-            "id": "CAÑAS 1",
-            "name": "CAÑAS",
-            "x": 788,
-            "y": 1236,
+            "id": 48,
+            "name": "CAÑAS 1",
+            "x": 748,
+            "y": 1182,
             "size": 50,
             "color": "#bae29d",
             "data": "",
             "fotos": [],
+            "images": [],
+            "msgs": [],
+            "especie": "CAÑAS"
+        },
+        {
+            "id": "1752545825685",
+            "name": "nombre",
+            "x": 309,
+            "y": 216,
+            "color": "#22aa44",
+            "data": [],
+            "especie": "especie",
+            "fotos": [],
+            "images": [],
             "msgs": []
         },
         {
-            "id": "nombre 1",
-            "name": "nombre",
-            "x": 86,
-            "y": 1203,
-            "color": "#22aa44",
+            "id": "1752545848971",
+            "name": "limo x3",
+            "x": 75,
+            "y": 556,
+            "color": "#ffeb14",
             "data": "",
-            "fotos": [
-                "fotos/nombre_685dbc384db79.png"
-            ],
+            "especie": "limonero",
+            "fotos": [],
+            "images": [],
             "msgs": []
         }
     ]

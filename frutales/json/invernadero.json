@@ -1,1 +1,93 @@
-{"name":"invernadero","plants":[{"id":"LA COSA VACIA","name":"COSA","x":443,"y":81,"color":"#cbbb10","data":"","fotos":[],"msgs":[]},{"id":"OBJETO x","name":"OBJETO","x":774,"y":70,"color":"#ffffff","data":"","fotos":[],"msgs":[]},{"id":"a x","name":"a","x":865,"y":1231,"color":"#0f0f10","data":"","fotos":[],"msgs":[{"user":"gus","msg":"a","date":"15/06/2025, 19:22"}]},{"id":"a x","name":"a","x":1534,"y":1287,"color":"#a30000","data":"","fotos":[],"msgs":[]},{"id":"a x","name":"a","x":802,"y":293,"color":"#00ff00","data":[]}]}
+{
+    "name": "invernadero",
+    "plants": [
+        {
+            "id": "LA COSA VACIA",
+            "name": "COSA",
+            "x": 443,
+            "y": 81,
+            "color": "#cbbb10",
+            "data": "",
+            "fotos": [
+                "fotos/COSA_6869dfa9af60d.png",
+                "fotos/COSA_6869e16d97833.jpg"
+            ],
+            "msgs": [],
+            "images": [
+                {
+                    "img": "fotos/COSA_6869dfa9af60d.png",
+                    "date": "Sat Jul 05 2025"
+                },
+                {
+                    "img": "fotos/COSA_6869e16d97833.jpg",
+                    "date": "Sat Jul 05 2025"
+                }
+            ],
+            "especie": "hj"
+        },
+        {
+            "id": "OBJETO x",
+            "name": "OBJETO",
+            "x": 774,
+            "y": 70,
+            "color": "#ffffff",
+            "data": "",
+            "fotos": [
+                "fotos/OBJETO_6869df94d24fb.png"
+            ],
+            "msgs": [],
+            "images": [
+                {
+                    "img": "fotos/OBJETO_6869df94d24fb.png",
+                    "date": "Sat Jul 05 2025"
+                }
+            ],
+            "especie": "undefined,"
+        },
+        {
+            "id": "a x",
+            "name": "a",
+            "x": 865,
+            "y": 1231,
+            "color": "#0f0f10",
+            "data": "",
+            "fotos": [],
+            "msgs": [
+                {
+                    "user": "gus",
+                    "msg": "a",
+                    "date": "15/06/2025, 19:22"
+                }
+            ]
+        },
+        {
+            "id": "a x",
+            "name": "a",
+            "x": 1534,
+            "y": 1287,
+            "color": "#a30000",
+            "data": "",
+            "fotos": [],
+            "msgs": []
+        },
+        {
+            "id": "a x",
+            "name": "a",
+            "x": 802,
+            "y": 294,
+            "color": "#00ff00",
+            "data": "",
+            "fotos": [
+                "fotos/a_6869df835bc75.png"
+            ],
+            "images": [
+                {
+                    "img": "fotos/a_6869df835bc75.png",
+                    "date": "Sat Jul 05 2025"
+                }
+            ],
+            "msgs": [],
+            "especie": "undefinedm"
+        }
+    ]
+}
